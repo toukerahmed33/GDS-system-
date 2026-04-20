@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirPro GDS Academy — Complete Air Ticketing Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c14;
+  --bg2: #0d1220;
+  --bg3: #111827;
+  --card: #131c2e;
+  --card2: #192236;
+  --border: #1e2d47;
+  --border2: #243350;
+  --gold: #f0b429;
+  --gold2: #ffd166;
+  --blue: #3b82f6;
+  --blue2: #60a5fa;
+  --cyan: #06b6d4;
+  --green: #10b981;
+  --red: #ef4444;
+  --purple: #8b5cf6;
+  --text: #e8edf5;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+  --display: 'Syne', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── STARS BG ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 60%, rgba(255,255,255,.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,.2) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── LAYOUT ─── */
+.app { display: flex; min-height: 100vh; position: relative; z-index: 1; }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+
+.sidebar-logo {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--gold), #e07b00);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 20px rgba(240,180,41,.3);
+}
+
+.logo-text {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 18px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-sub { font-size: 11px; color: var(--text3); letter-spacing: 1px; text-transform: uppercase; }
+
+.progress-wrap { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 8px; }
+.progress-bar { height: 4px; background: var(--border2); border-radius: 99px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--cyan)); border-radius: 99px; transition: width .5s ease; }
+
+.nav-section { padding: 12px 20px 4px; font-size: 10px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all .2s;
+  border-left: 3px solid transparent;
+  font-size: 13.5px;
+  color: var(--text2);
+  position: relative;
+}
+
+.nav-item:hover { background: rgba(59,130,246,.05); color: var(--text); }
+.nav-item.active { background: rgba(240,180,41,.06); border-left-color: var(--gold); color: var(--gold2); }
+.nav-item.completed .nav-check { color: var(--green); }
+
+.nav-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+  font-family: var(--mono);
+}
+
+.nav-item.active .nav-num { background: var(--gold); color: #000; }
+.nav-item.completed .nav-num { background: var(--green); color: #fff; }
+.nav-label { flex: 1; line-height: 1.3; }
+
+/* ─── MAIN ─── */
+.main { flex: 1; overflow-y: auto; }
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(135deg, #0a1628 0%, #0f2040 40%, #0a1628 100%);
+  padding: 60px 60px 50px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(240,180,41,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '✈';
+  position: absolute;
+  right: 60px; top: 50%;
+  transform: translateY(-50%) rotate(15deg);
+  font-size: 140px;
+  opacity: .04;
+  user-select: none;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(240,180,41,.1);
+  border: 1px solid rgba(240,180,41,.2);
+  color: var(--gold);
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero h1 span { background: linear-gradient(90deg, var(--gold), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.hero-desc { color: var(--text2); font-size: 16px; max-width: 560px; line-height: 1.7; margin-bottom: 28px; }
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-val { font-family: var(--display); font-size: 26px; font-weight: 700; color: var(--gold); }
+.stat-lbl { font-size: 12px; color: var(--text3); }
+
+/* ─── CONTENT ─── */
+.content { padding: 40px 60px; max-width: 960px; }
+
+/* ─── MODULE CARDS ─── */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.module-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all .25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.module-card:hover { border-color: var(--border2); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,.3); }
+.module-card.active { border-color: rgba(240,180,41,.4); background: rgba(240,180,41,.04); }
+
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent-color, var(--gold));
+  opacity: 0;
+  transition: opacity .25s;
+}
+
+.module-card:hover::before, .module-card.active::before { opacity: 1; }
+
+.mc-icon { font-size: 28px; margin-bottom: 12px; }
+.mc-num { font-size: 10px; color: var(--text3); font-family: var(--mono); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+.mc-title { font-family: var(--display); font-weight: 700; font-size: 15px; margin-bottom: 8px; line-height: 1.3; }
+.mc-desc { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
+.mc-lessons { display: flex; align-items: center; gap: 4px; margin-top: 12px; font-size: 11px; color: var(--text3); }
+
+/* ─── LESSON CONTENT ─── */
+.lesson-view { display: none; }
+.lesson-view.active { display: block; animation: fadeUp .4s ease; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.lesson-header {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+
+.lesson-header .breadcrumb { font-size: 12px; color: var(--text3); margin-bottom: 10px; }
+.lesson-header h2 { font-family: var(--display); font-size: 28px; font-weight: 800; margin-bottom: 10px; }
+.lesson-header p { color: var(--text2); font-size: 15px; line-height: 1.7; }
+
+.lesson-body {
+  display: grid;
+  gap: 20px;
+}
+
+/* ─── THEORY BOX ─── */
+.theory-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 32px;
+}
+
+.box-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 17px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.box-title .icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+h3.sub { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--gold2); margin: 18px 0 10px; }
+h4.sub2 { font-size: 14px; font-weight: 600; color: var(--blue2); margin: 14px 0 8px; }
+
+p.body-text { font-size: 14px; color: var(--text2); line-height: 1.8; margin-bottom: 10px; }
+p.body-text strong { color: var(--text); font-weight: 500; }
+
+/* ─── GDS TERMINAL ─── */
+.terminal-wrap {
+  background: #040810;
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: var(--mono);
+}
+
+.terminal-bar {
+  background: #0a0f1a;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.t-dot { width: 10px; height: 10px; border-radius: 50%; }
+.t-dot.r { background: #ff5f57; }
+.t-dot.y { background: #febc2e; }
+.t-dot.g { background: #28c840; }
+.t-title { flex: 1; text-align: center; font-size: 11px; color: var(--text3); letter-spacing: 1px; text-transform: uppercase; }
+
+.terminal-body { padding: 20px; font-size: 13px; line-height: 1.9; }
+
+.t-prompt { color: #4ade80; }
+.t-cmd { color: #fbbf24; }
+.t-output { color: #94a3b8; }
+.t-header { color: #60a5fa; }
+.t-data { color: #e2e8f0; }
+.t-highlight { color: #f0b429; font-weight: 600; }
+.t-warning { color: #f87171; }
+.t-line { border-top: 1px dashed #1e2d47; margin: 8px 0; }
+.t-comment { color: #475569; font-style: italic; }
+
+/* ─── INTERACTIVE TERMINAL ─── */
+.interactive-terminal {
+  background: #020509;
+  border: 1px solid var(--green);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(16,185,129,.08);
+}
+
+.int-terminal-bar {
+  background: #051009;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(16,185,129,.2);
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--green);
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.live-dot {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+
+.int-output {
+  padding: 16px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.8;
+  min-height: 120px;
+  max-height: 300px;
+  overflow-y: auto;
+  color: #94a3b8;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+
+.int-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(16,185,129,.15);
+  background: #020509;
+}
+
+.int-prompt-sym { color: var(--green); font-family: var(--mono); font-size: 14px; }
+.int-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.int-input::placeholder { color: var(--text3); font-style: italic; text-transform: none; }
+
+.btn-run {
+  background: var(--green);
+  color: #000;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.btn-run:hover { background: #34d399; }
+
+/* ─── COMMAND TABLE ─── */
+.cmd-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+.cmd-table th { background: var(--bg3); color: var(--text2); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 10px 14px; text-align: left; font-weight: 600; border-bottom: 1px solid var(--border2); }
+.cmd-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.cmd-table tr:last-child td { border-bottom: none; }
+.cmd-table tr:hover td { background: rgba(255,255,255,.02); }
+.cmd { color: var(--gold); font-family: var(--mono); font-weight: 600; font-size: 13px; background: rgba(240,180,41,.08); padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+.cmd-desc { color: var(--text2); line-height: 1.5; }
+.cmd-ex { color: var(--cyan); font-family: var(--mono); font-size: 12px; margin-top: 3px; }
+
+/* ─── CALLOUT ─── */
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin: 12px 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.callout.info { background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.2); }
+.callout.tip { background: rgba(16,185,129,.07); border: 1px solid rgba(16,185,129,.2); }
+.callout.warn { background: rgba(245,158,11,.07); border: 1px solid rgba(245,158,11,.2); }
+.callout.note { background: rgba(139,92,246,.07); border: 1px solid rgba(139,92,246,.2); }
+.callout .ci { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout.info .ci { color: var(--blue2); }
+.callout.tip .ci { color: var(--green); }
+.callout.warn .ci { color: #f59e0b; }
+.callout.note .ci { color: var(--purple); }
+.callout-body { color: var(--text2); }
+.callout-body strong { color: var(--text); }
+
+/* ─── QUIZ ─── */
+.quiz-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 28px;
+}
+
+.quiz-q { font-family: var(--display); font-weight: 700; font-size: 16px; margin-bottom: 16px; }
+.quiz-opts { display: grid; gap: 10px; }
+
+.quiz-opt {
+  padding: 12px 16px;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .2s;
+  font-size: 14px;
+  color: var(--text2);
+  background: var(--bg3);
+}
+
+.quiz-opt:hover { border-color: var(--blue); color: var(--text); }
+.quiz-opt.correct { border-color: var(--green); background: rgba(16,185,129,.08); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: rgba(239,68,68,.08); color: var(--red); }
+
+.quiz-result { margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 14px; display: none; }
+.quiz-result.show { display: block; }
+.quiz-result.pass { background: rgba(16,185,129,.1); border: 1px solid var(--green); color: var(--green); }
+.quiz-result.fail { background: rgba(239,68,68,.1); border: 1px solid var(--red); color: #fca5a5; }
+
+/* ─── NAV BTNS ─── */
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 40px;
+  gap: 12px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border2);
+  background: var(--card);
+  color: var(--text2);
+  cursor: pointer;
+  transition: all .2s;
+  font-size: 13px;
+  font-family: var(--sans);
+}
+
+.nav-btn:hover { border-color: var(--gold); color: var(--gold); }
+.nav-btn.primary { background: var(--gold); border-color: var(--gold); color: #000; font-weight: 600; }
+.nav-btn.primary:hover { background: var(--gold2); }
+
+/* ─── BADGE ─── */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+.badge.amadeus { background: rgba(59,130,246,.15); color: var(--blue2); border: 1px solid rgba(59,130,246,.2); }
+.badge.sabre { background: rgba(239,68,68,.12); color: #fca5a5; border: 1px solid rgba(239,68,68,.2); }
+.badge.galileo { background: rgba(16,185,129,.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,.2); }
+.badge.iata { background: rgba(240,180,41,.12); color: var(--gold); border: 1px solid rgba(240,180,41,.2); }
+
+/* ─── SPLIT ─── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+.info-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.info-card .ic-title { font-weight: 600; font-size: 13px; margin-bottom: 6px; color: var(--text); }
+.info-card .ic-val { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+.info-card .ic-sub { font-size: 12px; color: var(--text3); }
+
+/* ─── STEP LIST ─── */
+.step-list { display: grid; gap: 12px; }
+
+.step-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: all .2s;
+}
+
+.step-item:hover { border-color: var(--border2); }
+.step-num { width: 28px; height: 28px; background: var(--gold); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; font-family: var(--mono); }
+.step-content .s-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.step-content .s-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ─── ACCORDION ─── */
+.accordion-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+.accordion-head {
+  padding: 14px 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg3);
+  font-weight: 600;
+  font-size: 14px;
+  transition: background .2s;
+}
+.accordion-head:hover { background: var(--card2); }
+.accordion-head.open { background: var(--card2); color: var(--gold2); }
+.acc-icon { transition: transform .3s; font-size: 12px; color: var(--text3); }
+.accordion-head.open .acc-icon { transform: rotate(180deg); }
+.accordion-body { display: none; padding: 16px 18px; background: var(--card); border-top: 1px solid var(--border); font-size: 13.5px; color: var(--text2); line-height: 1.7; }
+.accordion-body.open { display: block; }
+
+/* ─── HOME VIEW ─── */
+.home-view { display: block; }
+
+.section-title {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .sidebar { width: 220px; min-width: 220px; }
+  .hero { padding: 40px 30px; }
+  .content { padding: 30px; }
+  .two-col, .three-col { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 30px; }
+}
+
+@media (max-width: 640px) {
+  .app { flex-direction: column; }
+  .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; }
+  .hero { padding: 30px 20px; }
+  .content { padding: 20px; }
+  .hero::after { display: none; }
+  .hero h1 { font-size: 24px; }
+}
+
+/* Extra utility */
+ul.list { padding-left: 18px; }
+ul.list li { color: var(--text2); font-size: 13.5px; line-height: 1.8; }
+ul.list li::marker { color: var(--gold); }
+
+.divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+.highlight-text { color: var(--gold); font-weight: 600; }
+.blue-text { color: var(--blue2); }
+.green-text { color: var(--green); }
+.red-text { color: var(--red); }
+
+.tag { display: inline-flex; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: var(--mono); background: var(--bg3); border: 1px solid var(--border2); color: var(--text2); margin: 2px; }
+.tag.gold { background: rgba(240,180,41,.1); border-color: rgba(240,180,41,.25); color: var(--gold); }
+.tag.blue { background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.25); color: var(--blue2); }
+.tag.green { background: rgba(16,185,129,.1); border-color: rgba(16,185,129,.25); color: var(--green); }
+
+.img-placeholder {
+  background: var(--bg3);
+  border: 1px dashed var(--border2);
+  border-radius: 8px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text3);
+  font-size: 13px;
+  gap: 6px;
+}
+
+/* complete mark */
+.complete-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(16,185,129,.1);
+  border: 1px solid rgba(16,185,129,.3);
+  border-radius: 8px;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.complete-btn:hover { background: rgba(16,185,129,.2); }
+.complete-btn.done { background: var(--green); color: #000; border-color: var(--green); }
+
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ═══════════════════════ SIDEBAR ═══════════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge">
+      <div class="logo-icon">✈</div>
+      <div>
+        <div class="logo-text">AirPro GDS</div>
+        <div class="logo-sub">Academy</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Course Progress</span>
+      <span id="prog-pct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="prog-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="nav-section">Overview</div>
+  <div class="nav-item active" onclick="showHome()" id="nav-home">
+    <div class="nav-num">🏠</div>
+    <div class="nav-label">Course Overview</div>
+  </div>
+
+  <div class="nav-section">Modules</div>
+  <div class="nav-item" onclick="showLesson(1)" id="nav-1">
+    <div class="nav-num" id="nn-1">1</div>
+    <div class="nav-label">GDS পরিচিতি</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(2)" id="nav-2">
+    <div class="nav-num" id="nn-2">2</div>
+    <div class="nav-label">Airline Codes & Terminology</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(3)" id="nav-3">
+    <div class="nav-num" id="nn-3">3</div>
+    <div class="nav-label">Amadeus Basic Commands</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(4)" id="nav-4">
+    <div class="nav-num" id="nn-4">4</div>
+    <div class="nav-label">Availability & Schedules</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(5)" id="nav-5">
+    <div class="nav-num" id="nn-5">5</div>
+    <div class="nav-label">Fare Display & Pricing</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(6)" id="nav-6">
+    <div class="nav-num" id="nn-6">6</div>
+    <div class="nav-label">PNR তৈরি (Booking)</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(7)" id="nav-7">
+    <div class="nav-num" id="nn-7">7</div>
+    <div class="nav-label">Ticketing & E-Ticket</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(8)" id="nav-8">
+    <div class="nav-num" id="nn-8">8</div>
+    <div class="nav-label">Queue Management</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(9)" id="nav-9">
+    <div class="nav-num" id="nn-9">9</div>
+    <div class="nav-label">Reissue & Refund</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(10)" id="nav-10">
+    <div class="nav-num" id="nn-10">10</div>
+    <div class="nav-label">Hotel & Car Booking</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(11)" id="nav-11">
+    <div class="nav-num" id="nn-11">11</div>
+    <div class="nav-label">Sabre GDS Commands</div>
+  </div>
+  <div class="nav-item" onclick="showLesson(12)" id="nav-12">
+    <div class="nav-num" id="nn-12">12</div>
+    <div class="nav-label">🖥️ Live GDS Simulator</div>
+  </div>
+
+  <div class="nav-section">Reference</div>
+  <div class="nav-item" onclick="showLesson(13)" id="nav-13">
+    <div class="nav-num" id="nn-13">📖</div>
+    <div class="nav-label">Quick Reference Card</div>
+  </div>
+</aside>
+
+<!-- ═══════════════════════ MAIN ═══════════════════════ -->
+<main class="main" id="main-content">
+
+  <!-- ─── HERO ─── -->
+  <div class="hero">
+    <div class="hero-tag">✈ Professional Certification Course</div>
+    <h1>Air Ticketing &<br><span>GDS Systems</span> Mastery</h1>
+    <p class="hero-desc">Amadeus, Sabre ও Galileo GDS ব্যবহার করে professional air ticketing শিখুন। Real terminal commands থেকে শুরু করে complex PNR management পর্যন্ত সব কিছু।</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-val">12</div><div class="stat-lbl">Modules</div></div>
+      <div class="stat"><div class="stat-val">80+</div><div class="stat-lbl">Commands</div></div>
+      <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">GDS Systems</div></div>
+      <div class="stat"><div class="stat-val">Live</div><div class="stat-lbl">Simulator</div></div>
+    </div>
+  </div>
+
+  <!-- ─── HOME VIEW ─── -->
+  <div class="content">
+    <div class="home-view" id="view-home">
+      <div class="section-title">📚 Course Modules</div>
+      <div class="module-grid">
+        <div class="module-card" onclick="showLesson(1)" style="--accent-color:#f0b429">
+          <div class="mc-icon">🌐</div>
+          <div class="mc-num">Module 01</div>
+          <div class="mc-title">GDS পরিচিতি ও ইতিহাস</div>
+          <div class="mc-desc">Global Distribution System কী, কীভাবে কাজ করে এবং প্রধান GDS গুলোর পরিচয়।</div>
+          <div class="mc-lessons">📖 6 Lessons &nbsp;·&nbsp; ⏱ 45 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(2)" style="--accent-color:#06b6d4">
+          <div class="mc-icon">🏷️</div>
+          <div class="mc-num">Module 02</div>
+          <div class="mc-title">Airlines Codes & Terminology</div>
+          <div class="mc-desc">IATA/ICAO codes, airport codes, booking class, cabin class সম্পর্কে বিস্তারিত।</div>
+          <div class="mc-lessons">📖 5 Lessons &nbsp;·&nbsp; ⏱ 40 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(3)" style="--accent-color:#3b82f6">
+          <div class="mc-icon">⌨️</div>
+          <div class="mc-num">Module 03</div>
+          <div class="mc-title">Amadeus Basic Commands</div>
+          <div class="mc-desc">Amadeus GDS এর মূল command structure এবং cryptic format পরিচয়।</div>
+          <div class="mc-lessons">📖 8 Lessons &nbsp;·&nbsp; ⏱ 60 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(4)" style="--accent-color:#8b5cf6">
+          <div class="mc-icon">📅</div>
+          <div class="mc-num">Module 04</div>
+          <div class="mc-title">Availability & Schedules</div>
+          <div class="mc-desc">Flight availability দেখা, schedule display, waitlist management।</div>
+          <div class="mc-lessons">📖 6 Lessons &nbsp;·&nbsp; ⏱ 50 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(5)" style="--accent-color:#10b981">
+          <div class="mc-icon">💰</div>
+          <div class="mc-num">Module 05</div>
+          <div class="mc-title">Fare Display & Pricing</div>
+          <div class="mc-desc">Fare quote display, fare rules, pricing commands, tax calculation।</div>
+          <div class="mc-lessons">📖 7 Lessons &nbsp;·&nbsp; ⏱ 55 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(6)" style="--accent-color:#ef4444">
+          <div class="mc-icon">📋</div>
+          <div class="mc-num">Module 06</div>
+          <div class="mc-title">PNR তৈরি ও Management</div>
+          <div class="mc-desc">Passenger Name Record তৈরি থেকে end transaction পর্যন্ত সম্পূর্ণ প্রক্রিয়া।</div>
+          <div class="mc-lessons">📖 10 Lessons &nbsp;·&nbsp; ⏱ 75 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(7)" style="--accent-color:#f0b429">
+          <div class="mc-icon">🎫</div>
+          <div class="mc-num">Module 07</div>
+          <div class="mc-title">Ticketing & E-Ticket</div>
+          <div class="mc-desc">TTP command, e-ticket issuance, BSP ticketing, boarding pass।</div>
+          <div class="mc-lessons">📖 6 Lessons &nbsp;·&nbsp; ⏱ 50 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(8)" style="--accent-color:#06b6d4">
+          <div class="mc-icon">🗂️</div>
+          <div class="mc-num">Module 08</div>
+          <div class="mc-title">Queue Management</div>
+          <div class="mc-desc">Queue কাজ করার পদ্ধতি, queue categories, automated queuing।</div>
+          <div class="mc-lessons">📖 4 Lessons &nbsp;·&nbsp; ⏱ 35 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(9)" style="--accent-color:#f59e0b">
+          <div class="mc-icon">🔄</div>
+          <div class="mc-num">Module 09</div>
+          <div class="mc-title">Reissue & Refund</div>
+          <div class="mc-desc">Ticket reissue, void, refund processing, penalty calculation।</div>
+          <div class="mc-lessons">📖 7 Lessons &nbsp;·&nbsp; ⏱ 60 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(10)" style="--accent-color:#8b5cf6">
+          <div class="mc-icon">🏨</div>
+          <div class="mc-num">Module 10</div>
+          <div class="mc-title">Hotel & Car Booking</div>
+          <div class="mc-desc">GDS দিয়ে hotel reservation এবং car rental booking।</div>
+          <div class="mc-lessons">📖 5 Lessons &nbsp;·&nbsp; ⏱ 45 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(11)" style="--accent-color:#ef4444">
+          <div class="mc-icon">🔴</div>
+          <div class="mc-num">Module 11</div>
+          <div class="mc-title">Sabre GDS Commands</div>
+          <div class="mc-desc">Sabre Red 360 platform এর commands ও Amadeus এর সাথে তুলনা।</div>
+          <div class="mc-lessons">📖 8 Lessons &nbsp;·&nbsp; ⏱ 65 min</div>
+        </div>
+        <div class="module-card" onclick="showLesson(12)" style="--accent-color:#10b981">
+          <div class="mc-icon">🖥️</div>
+          <div class="mc-num">Module 12</div>
+          <div class="mc-title">Live GDS Simulator</div>
+          <div class="mc-desc">Interactive terminal এ real GDS commands practice করুন।</div>
+          <div class="mc-lessons">🎮 Interactive Practice</div>
+        </div>
+      </div>
+
+      <div class="section-title">🎯 আপনি কী শিখবেন</div>
+      <div class="two-col" style="margin-bottom:32px">
+        <div class="theory-box" style="padding:20px">
+          <h3 class="sub" style="margin-top:0">Professional Skills</h3>
+          <ul class="list">
+            <li>Amadeus, Sabre, Galileo GDS operate করা</li>
+            <li>Cryptic command language দক্ষতা</li>
+            <li>PNR তৈরি ও সম্পূর্ণ management</li>
+            <li>Fare calculation ও ticketing</li>
+            <li>Reissue, void ও refund process</li>
+            <li>BSP/ARC reporting basics</li>
+          </ul>
+        </div>
+        <div class="theory-box" style="padding:20px">
+          <h3 class="sub" style="margin-top:0">Career Opportunities</h3>
+          <ul class="list">
+            <li>Travel Agency Ticketing Officer</li>
+            <li>Airline Reservation Agent</li>
+            <li>Airport Customer Service</li>
+            <li>Corporate Travel Manager</li>
+            <li>Online Travel Agency (OTA) Executive</li>
+            <li>Tour Operator Specialist</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="ci">ℹ️</span>
+        <div class="callout-body"><strong>Course Note:</strong> এই কোর্সে মূলত <strong>Amadeus Selling Platform</strong> ব্যবহার করা হয়েছে কারণ এটি বাংলাদেশ ও দক্ষিণ এশিয়ায় সবচেয়ে বেশি ব্যবহৃত। পাশাপাশি Sabre এর commands ও Module 11 এ আলোচনা করা হয়েছে।</div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 1 ═══════ -->
+    <div class="lesson-view" id="view-1">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 01 · GDS পরিচিতি</div>
+        <h2>Global Distribution System (GDS) — সম্পূর্ণ পরিচয়</h2>
+        <p>GDS কী, কীভাবে কাজ করে, বিশ্বের প্রধান GDS platform গুলো এবং বাংলাদেশের travel industry তে এর ভূমিকা।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(240,180,41,.15)">🌐</div> GDS কী?</div>
+          <p class="body-text">GDS (Global Distribution System) হলো একটি <strong>কেন্দ্রীয় computerized network platform</strong> যা airlines, hotels, car rentals এবং travel agencies এর মধ্যে real-time information আদান-প্রদান করে। এটি মূলত airlines এর inventory (আসন, ভাড়া) travel agents কে access দেওয়ার জন্য তৈরি।</p>
+          <p class="body-text">সহজ ভাষায়: আপনি যখন Biman Bangladesh Airlines এর ticket কাটতে travel agency তে যান, agent GDS terminal এ command দিয়ে সরাসরি airline এর seat inventory দেখে এবং book করে।</p>
+          <h3 class="sub">GDS এর কাজ করার পদ্ধতি</h3>
+          <div class="step-list">
+            <div class="step-item">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <div class="s-title">Airlines CRS → GDS</div>
+                <div class="s-desc">প্রতিটি airline এর নিজস্ব Computer Reservation System (CRS) থাকে। Biman এর SITA, Emirates এর AOS ইত্যাদি। এই CRS গুলো GDS এর সাথে connected থাকে।</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="s-title">GDS → Travel Agencies</div>
+                <div class="s-desc">GDS এই airlines এর seat availability, fares, schedules একত্রিত করে travel agencies কে দেখায় একটি single interface এ।</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <div class="s-title">Booking → Confirmation</div>
+                <div class="s-desc">Travel agent booking করলে GDS airlines এর CRS কে instantly update করে, passenger কে PNR (booking reference) দেয়।</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(59,130,246,.15)">🏢</div> বিশ্বের প্রধান GDS সিস্টেম</div>
+          <div class="three-col">
+            <div class="info-card">
+              <div class="ic-val" style="color:var(--blue2)">Amadeus</div>
+              <div class="ic-title">সবচেয়ে বড় GDS</div>
+              <div class="ic-sub">Madrid, Spain। বিশ্বব্যাপী market share ~40%। বাংলাদেশে সবচেয়ে জনপ্রিয়।</div>
+              <div style="margin-top:10px"><span class="badge amadeus">1B+ bookings/yr</span></div>
+            </div>
+            <div class="info-card">
+              <div class="ic-val" style="color:#fca5a5">Sabre</div>
+              <div class="ic-title">North America প্রধান</div>
+              <div class="ic-sub">Texas, USA। আমেরিকা ও লাতিন আমেরিকায় শীর্ষস্থানীয়। United Airlines শুরু করেছিল।</div>
+              <div style="margin-top:10px"><span class="badge sabre">400M+ PNRs</span></div>
+            </div>
+            <div class="info-card">
+              <div class="ic-val" style="color:#6ee7b7">Galileo</div>
+              <div class="ic-title">Travelport Group</div>
+              <div class="ic-sub">Worldspan ও Apollo এর সাথে মিলে Travelport। UK ও Australia তে জনপ্রিয়।</div>
+              <div style="margin-top:10px"><span class="badge galileo">Travelport</span></div>
+            </div>
+          </div>
+          <div class="callout tip" style="margin-top:16px">
+            <span class="ci">💡</span>
+            <div class="callout-body"><strong>বাংলাদেশে:</strong> বাংলাদেশের প্রায় সব travel agency Amadeus ব্যবহার করে। Biman Bangladesh Airlines নিজেও Amadeus CRS ব্যবহার করে। তাই Amadeus শেখা এখানে সবচেয়ে practical।</div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(16,185,129,.15)">📊</div> GDS Industry Overview</div>
+          <p class="body-text">বিশ্বে প্রতিদিন লক্ষ লক্ষ flight ticket GDS এর মাধ্যমে বিক্রি হয়। IATA এর তথ্যমতে, global air travel revenue এর প্রায় <strong>60-70%</strong> GDS এর মাধ্যমে বুকিং হয়।</p>
+          <div class="two-col">
+            <div>
+              <h3 class="sub">GDS এর সুবিধা</h3>
+              <ul class="list">
+                <li>৯০০+ airlines এর real-time access</li>
+                <li>Instant fare comparison</li>
+                <li>Multi-carrier itinerary তৈরি</li>
+                <li>Automated BSP settlement</li>
+                <li>24/7 global connectivity</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="sub">Travel Agent এর ভূমিকা</h3>
+              <ul class="list">
+                <li>GDS terminal operate করা</li>
+                <li>Best fare খুঁজে দেওয়া</li>
+                <li>Complex itinerary তৈরি</li>
+                <li>BSP এর মাধ্যমে payment</li>
+                <li>After-sales support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-box">
+          <div class="quiz-q">❓ Quiz: GDS এর পূর্ণ রূপ কী?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="checkQ(this,'w')">General Distribution Software</div>
+            <div class="quiz-opt" onclick="checkQ(this,'c')">Global Distribution System</div>
+            <div class="quiz-opt" onclick="checkQ(this,'w')">Global Data Service</div>
+            <div class="quiz-opt" onclick="checkQ(this,'w')">General Dispatch System</div>
+          </div>
+          <div class="quiz-result" id="qr">✅ সঠিক! Global Distribution System — এটি airlines, hotels ও travel agencies কে সংযুক্ত করার কেন্দ্রীয় platform।</div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="complete-btn" onclick="markDone(1)">✓ Module সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(2)">পরবর্তী Module →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 2 ═══════ -->
+    <div class="lesson-view" id="view-2">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 02 · Codes & Terminology</div>
+        <h2>Airline Codes ও Aviation Terminology</h2>
+        <p>Air ticketing এ ব্যবহৃত সব ধরনের codes, abbreviations এবং technical terms সম্পর্কে বিস্তারিত জ্ঞান।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(240,180,41,.15)">🏷️</div> IATA Airline Codes (2-Letter)</div>
+          <p class="body-text">IATA (International Air Transport Association) প্রতিটি airline কে একটি 2-letter code দেয়। GDS terminal এ এই code ব্যবহার করা হয়।</p>
+          <table class="cmd-table">
+            <tr><th>Airline</th><th>IATA Code</th><th>ICAO Code</th><th>দেশ</th></tr>
+            <tr><td>Biman Bangladesh</td><td><span class="cmd">BG</span></td><td><span class="cmd">BBC</span></td><td>🇧🇩 Bangladesh</td></tr>
+            <tr><td>US-Bangla Airlines</td><td><span class="cmd">BS</span></td><td><span class="cmd">UBG</span></td><td>🇧🇩 Bangladesh</td></tr>
+            <tr><td>Emirates</td><td><span class="cmd">EK</span></td><td><span class="cmd">UAE</span></td><td>🇦🇪 UAE</td></tr>
+            <tr><td>Qatar Airways</td><td><span class="cmd">QR</span></td><td><span class="cmd">QTR</span></td><td>🇶🇦 Qatar</td></tr>
+            <tr><td>Singapore Airlines</td><td><span class="cmd">SQ</span></td><td><span class="cmd">SIA</span></td><td>🇸🇬 Singapore</td></tr>
+            <tr><td>Thai Airways</td><td><span class="cmd">TG</span></td><td><span class="cmd">THA</span></td><td>🇹🇭 Thailand</td></tr>
+            <tr><td>Cathay Pacific</td><td><span class="cmd">CX</span></td><td><span class="cmd">CPA</span></td><td>🇭🇰 Hong Kong</td></tr>
+            <tr><td>Malaysia Airlines</td><td><span class="cmd">MH</span></td><td><span class="cmd">MAS</span></td><td>🇲🇾 Malaysia</td></tr>
+            <tr><td>IndiGo</td><td><span class="cmd">6E</span></td><td><span class="cmd">IGO</span></td><td>🇮🇳 India</td></tr>
+            <tr><td>Air India</td><td><span class="cmd">AI</span></td><td><span class="cmd">AIC</span></td><td>🇮🇳 India</td></tr>
+          </table>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(6,182,212,.15)">🛫</div> Airport Codes (IATA 3-Letter)</div>
+          <p class="body-text">প্রতিটি airport এর একটি unique 3-letter IATA code আছে। GDS এ destination বলতে এই code ব্যবহার করা হয়।</p>
+          <div class="two-col">
+            <table class="cmd-table">
+              <tr><th>Airport</th><th>Code</th></tr>
+              <tr><td>Hazrat Shahjalal (Dhaka)</td><td><span class="cmd">DAC</span></td></tr>
+              <tr><td>Shah Amanat (Chittagong)</td><td><span class="cmd">CGP</span></td></tr>
+              <tr><td>Osmani (Sylhet)</td><td><span class="cmd">ZYL</span></td></tr>
+              <tr><td>Cox's Bazar</td><td><span class="cmd">CXB</span></td></tr>
+              <tr><td>Dubai International</td><td><span class="cmd">DXB</span></td></tr>
+              <tr><td>Doha Hamad</td><td><span class="cmd">DOH</span></td></tr>
+            </table>
+            <table class="cmd-table">
+              <tr><th>Airport</th><th>Code</th></tr>
+              <tr><td>Singapore Changi</td><td><span class="cmd">SIN</span></td></tr>
+              <tr><td>Bangkok Suvarnabhumi</td><td><span class="cmd">BKK</span></td></tr>
+              <tr><td>Kuala Lumpur KLIA</td><td><span class="cmd">KUL</span></td></tr>
+              <tr><td>London Heathrow</td><td><span class="cmd">LHR</span></td></tr>
+              <tr><td>New York JFK</td><td><span class="cmd">JFK</span></td></tr>
+              <tr><td>Tokyo Narita</td><td><span class="cmd">NRT</span></td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(139,92,246,.15)">💺</div> Cabin Class ও Booking Class</div>
+          <p class="body-text">একটি aircraft এ multiple cabin classes থাকে এবং প্রতিটি cabin এ বিভিন্ন fare এর জন্য আলাদা booking class (RBD - Reservation Booking Designator) থাকে।</p>
+          <div class="two-col">
+            <div>
+              <h3 class="sub">Cabin Classes</h3>
+              <table class="cmd-table">
+                <tr><th>Cabin</th><th>Code</th><th>বিবরণ</th></tr>
+                <tr><td>First Class</td><td><span class="cmd">F</span></td><td>সর্বোচ্চ সেবা</td></tr>
+                <tr><td>Business Class</td><td><span class="cmd">C / J</span></td><td>ব্যবসায়িক</td></tr>
+                <tr><td>Premium Economy</td><td><span class="cmd">W</span></td><td>মাঝামাঝি</td></tr>
+                <tr><td>Economy Class</td><td><span class="cmd">Y</span></td><td>সাধারণ</td></tr>
+              </table>
+            </div>
+            <div>
+              <h3 class="sub">Booking Classes (Economy Example)</h3>
+              <table class="cmd-table">
+                <tr><th>Class</th><th>মানে</th></tr>
+                <tr><td><span class="cmd">Y</span></td><td>Full fare economy</td></tr>
+                <tr><td><span class="cmd">B, M, H</span></td><td>Discounted economy</td></tr>
+                <tr><td><span class="cmd">K, L, Q</span></td><td>Low fare economy</td></tr>
+                <tr><td><span class="cmd">V, W, G</span></td><td>Deep discount</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="callout warn">
+            <span class="ci">⚠️</span>
+            <div class="callout-body"><strong>গুরুত্বপূর্ণ:</strong> Booking class (যেমন K, L, Q) আর Cabin class (Economy) একই জিনিস নয়। একই Economy cabin এ অনেক booking class থাকতে পারে, প্রতিটির fare আলাদা।</div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(16,185,129,.15)">📝</div> Important Abbreviations</div>
+          <div class="two-col">
+            <div>
+              <table class="cmd-table">
+                <tr><th>Term</th><th>মানে</th></tr>
+                <tr><td><span class="cmd">PNR</span></td><td>Passenger Name Record</td></tr>
+                <tr><td><span class="cmd">GDS</span></td><td>Global Distribution System</td></tr>
+                <tr><td><span class="cmd">CRS</span></td><td>Computer Reservation System</td></tr>
+                <tr><td><span class="cmd">BSP</span></td><td>Billing Settlement Plan</td></tr>
+                <tr><td><span class="cmd">IATA</span></td><td>Int'l Air Transport Assoc.</td></tr>
+                <tr><td><span class="cmd">OSI</span></td><td>Other Service Information</td></tr>
+              </table>
+            </div>
+            <div>
+              <table class="cmd-table">
+                <tr><th>Term</th><th>মানে</th></tr>
+                <tr><td><span class="cmd">SSR</span></td><td>Special Service Request</td></tr>
+                <tr><td><span class="cmd">TL</span></td><td>Ticketing Time Limit</td></tr>
+                <tr><td><span class="cmd">RLOC</span></td><td>Record Locator (PNR code)</td></tr>
+                <tr><td><span class="cmd">OW</span></td><td>One Way</td></tr>
+                <tr><td><span class="cmd">RT</span></td><td>Round Trip</td></tr>
+                <tr><td><span class="cmd">OJ</span></td><td>Open Jaw</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(1)">← আগের Module</button>
+          <button class="complete-btn" onclick="markDone(2)">✓ Module সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(3)">পরবর্তী →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 3 ═══════ -->
+    <div class="lesson-view" id="view-3">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 03 · Amadeus Basic Commands</div>
+        <h2>Amadeus Cryptic Commands — মূল ভিত্তি</h2>
+        <p>Amadeus GDS এ cryptic (command-based) interface ব্যবহার করার পদ্ধতি এবং সব ধরনের basic commands।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(59,130,246,.15)">📌</div> Amadeus Command Structure</div>
+          <p class="body-text">Amadeus Cryptic এ প্রতিটি command একটি নির্দিষ্ট format অনুসরণ করে। Commands সাধারণত uppercase এ type করা হয় এবং Enter বা ; দিয়ে execute হয়।</p>
+          <div class="terminal-wrap">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">Amadeus Cryptic Terminal — Command Structure</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-comment">-- Command Format: [Action] [Subject] [Modifier]</span>
+<br><span class="t-highlight">AN</span>   = Availability [Action] + [N=Next]
+<br><span class="t-highlight">SS</span>   = Sell Segment
+<br><span class="t-highlight">NM</span>   = Name [passenger]
+<br><span class="t-highlight">AP</span>   = Address/Phone
+<br><span class="t-highlight">TL</span>   = Ticketing Limit
+<br><span class="t-highlight">ER</span>   = End & Retrieve
+<br><span class="t-highlight">ET</span>   = End Transaction
+<br><span class="t-highlight">IG</span>   = Ignore (cancel changes)
+<br>
+<span class="t-comment">-- সহজ নিয়ম: প্রথম ১-২ অক্ষর = কী করবেন, বাকিটা = বিস্তারিত তথ্য</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(240,180,41,.15)">📋</div> Essential Commands Reference</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th><th>Example</th></tr>
+            <tr>
+              <td><span class="cmd">AN</span></td>
+              <td class="cmd-desc">Availability Display — নির্দিষ্ট রুটের available flights দেখা</td>
+              <td><div class="cmd-ex">AN15NOVDACDXBEK</div></td>
+            </tr>
+            <tr>
+              <td><span class="cmd">AD</span></td>
+              <td class="cmd-desc">Availability by Departure time</td>
+              <td><div class="cmd-ex">AD15NOVDACDXB/A0600</div></td>
+            </tr>
+            <tr>
+              <td><span class="cmd">SS</span></td>
+              <td class="cmd-desc">Sell Segment — flight বুক করা</td>
+              <td><div class="cmd-ex">SS EK583 Y 15NOV 1 DACDXB HK1</div></td>
+            </tr>
+            <tr>
+              <td><span class="cmd">NM</span></td>
+              <td class="cmd-desc">Name Element — যাত্রীর নাম যোগ করা</td>
+              <td><div class="cmd-ex">NM1AHMED/KARIMDR</div></td>
+            </tr>
+            <tr>
+              <td><span class="cmd">AP</span></td>
+              <td class="cmd-desc">Address/Phone — contact নম্বর যোগ করা</td>
+              <td><div class="cmd-ex">APDAC-01711234567</div></td>
+            </tr>
+            <tr>
+              <td><span class="cmd">TKOK</span></td>
+              <td class="cmd-desc">Ticketing Limit — ticket করার সময়সীমা</td>
+              <td><div class="cmd-ex">TKOK/20NOV</div></td>
+            </tr>
+            <tr>
+              <td><span class="cmd">ER</span></td>
+              <td class="cmd-desc">End & Retrieve PNR — PNR save করে retrieve করা</td>
+              <td><div class="cmd-ex">ER</div></td>
+            </tr>
+            <tr>
+              <td><span class="cmd">ET</span></td>
+              <td class="cmd-desc">End Transaction — PNR save করা</td>
+              <td><div class="cmd-ex">ET</div></td>
+            </tr>
+            <tr>
+              <td><span class="cmd">IG</span></td>
+              <td class="cmd-desc">Ignore — কোনো change না করে exit</td>
+              <td><div class="cmd-ex">IG</div></td>
+            </tr>
+            <tr>
+              <td><span class="cmd">RT</span></td>
+              <td class="cmd-desc">Retrieve PNR — PNR open করা</td>
+              <td><div class="cmd-ex">RTXYZ123</div></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(16,185,129,.15)">🖥️</div> Terminal Demo: Basic Session</div>
+          <div class="terminal-wrap">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">Amadeus Terminal Demo</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-prompt">></span> <span class="t-cmd">AN15NOVDACDXBEK</span>
+<br><span class="t-comment">-- 15 November DAC→DXB, Emirates flights availability</span>
+<br>
+<span class="t-header"> ** AMADEUS AVAILABILITY ** DAC DHAKA.BD     15NOV TUE</span>
+<br><span class="t-header"> 1 EK</span><span class="t-data"> 585 J9 C7 D2 I0 Y9 B9 M9 H9 K9  DAC  0310  DXB  0540+1 773  0</span>
+<br><span class="t-data"> 2 EK  583 J7 C5 D0 I0 Y9 B7 M5 H3 K1  DAC  2115  DXB  0010+1 773  0</span>
+<br><span class="t-data"> 3 BG  049 J2 C0 D0 I0 Y9 B6 M4 H2 K0  DAC  2300  DXB  0300+1 738  0</span>
+<br><span class="t-data"> 4 QR  638 J4 C2 D0 I0 Y8 B6 M4 H2 K2  DAC  1800  DOH  2100  77W  0</span>
+<br>
+<span class="t-comment">-- J=Business class seats, Y=Economy full, B,M,H,K=discounted economy</span>
+<span class="t-comment">-- সংখ্যা = available seats, 0 = sold out/waitlist</span>
+<br>
+<span class="t-prompt">></span> <span class="t-cmd">SS1Y1</span>
+<span class="t-comment">-- Line 1 flight এর Y class এ 1 seat book করুন</span>
+<br>
+<span class="t-prompt">></span> <span class="t-cmd">NM1AHMED/KARIMDR</span>
+<span class="t-comment">-- যাত্রীর নাম: AHMED হলো surname, KARIM হলো firstname</span>
+            </div>
+          </div>
+          <div class="callout note">
+            <span class="ci">📌</span>
+            <div class="callout-body"><strong>Date Format:</strong> Amadeus এ date সবসময় DDMMMYYYY format এ লিখতে হয়। যেমন 15NOV বা 15NOV24। Amadeus সাধারণত 3-letter month abbreviation ব্যবহার করে: JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC।</div>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(2)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(3)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(4)">পরবর্তী →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 4 ═══════ -->
+    <div class="lesson-view" id="view-4">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 04 · Availability & Schedules</div>
+        <h2>Flight Availability ও Schedule Display</h2>
+        <p>Amadeus এ flight availability দেখার সব পদ্ধতি, বিভিন্ন format এ schedule display এবং waitlist management।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(139,92,246,.15)">📅</div> AN Command — Availability Display</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th><th>Example</th></tr>
+            <tr><td><span class="cmd">AN</span></td><td class="cmd-desc">Basic availability — airline + route + date</td><td><div class="cmd-ex">AN15NOVDACDXBEK</div></td></tr>
+            <tr><td><span class="cmd">AN...*</span></td><td class="cmd-desc">All airlines availability</td><td><div class="cmd-ex">AN15NOVDACDXB</div></td></tr>
+            <tr><td><span class="cmd">AN.../AC</span></td><td class="cmd-desc">Connection flights via airport</td><td><div class="cmd-ex">AN15NOVDACLHR/ACDXB</div></td></tr>
+            <tr><td><span class="cmd">AN.../CY</span></td><td class="cmd-desc">Availability by cabin class Y=Economy</td><td><div class="cmd-ex">AN15NOVDACDXB/CY</div></td></tr>
+            <tr><td><span class="cmd">AN.../CJ</span></td><td class="cmd-desc">Business class only</td><td><div class="cmd-ex">AN15NOVDACDXB/CJ</div></td></tr>
+            <tr><td><span class="cmd">MD</span></td><td class="cmd-desc">More availability (next page)</td><td><div class="cmd-ex">MD</div></td></tr>
+            <tr><td><span class="cmd">MU</span></td><td class="cmd-desc">Move up (previous page)</td><td><div class="cmd-ex">MU</div></td></tr>
+          </table>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(6,182,212,.15)">🗓️</div> Schedule Display Commands</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th><th>Example</th></tr>
+            <tr><td><span class="cmd">SD</span></td><td class="cmd-desc">Schedule Display — flight schedule দেখা</td><td><div class="cmd-ex">SDDACDXBEK</div></td></tr>
+            <tr><td><span class="cmd">SD/D</span></td><td class="cmd-desc">Schedule by specific date</td><td><div class="cmd-ex">SD15NOVDACDXB</div></td></tr>
+            <tr><td><span class="cmd">TN</span></td><td class="cmd-desc">Timetable — airline এর weekly schedule</td><td><div class="cmd-ex">TNEKDACDXB</div></td></tr>
+            <tr><td><span class="cmd">FN</span></td><td class="cmd-desc">Flight Info — flight details</td><td><div class="cmd-ex">FNEK583/15NOV</div></td></tr>
+          </table>
+
+          <div class="terminal-wrap" style="margin-top:16px">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">Schedule Display Output</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-prompt">></span> <span class="t-cmd">SDDACDXBEK</span>
+<br>
+<span class="t-header"> ** AMADEUS SCHEDULES ** EK EMIRATES</span>
+<br><span class="t-header"> DACDXB   DHAKA TO DUBAI</span>
+<br><span class="t-line"></span>
+<span class="t-data"> 1 EK 583  DAC 2115  DXB 0010+1  DAILY      773  0:55 </span>
+<span class="t-data"> 2 EK 585  DAC 0310  DXB 0540+1  DAILY      773  0:30 </span>
+<span class="t-data"> 3 EK 587  DAC 1430  DXB 1710    MON WED FRI 789  0:40 </span>
+<br><span class="t-comment">-- +1 মানে পরেরদিন arrive। ০:৫৫ = transit time</span>
+<br>
+<span class="t-prompt">></span> <span class="t-cmd">FNEK583/15NOV</span>
+<br>
+<span class="t-header"> FLIGHT INFO - EK583  15NOV</span>
+<br><span class="t-data"> DAC DHAKA SHAH JALAL     DEP 2115</span>
+<span class="t-data"> DXB DUBAI INTERNATIONAL  ARR 0010+1</span>
+<span class="t-data"> EQUIPMENT : 773 (BOEING 777-300ER)</span>
+<span class="t-data"> DURATION  : 04H55M</span>
+<span class="t-data"> MEALS     : DINNER / SNACK</span>
+<span class="t-data"> STATUS    : OPERATING</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(245,158,11,.15)">⏳</div> Waitlist ও Status Codes</div>
+          <p class="body-text">Availability display এ প্রতিটি booking class এর পাশে সংখ্যা থাকে। এই সংখ্যা বা status code দেখে seat পাওয়া যাবে কিনা বোঝা যায়।</p>
+          <div class="two-col">
+            <table class="cmd-table">
+              <tr><th>Status</th><th>মানে</th></tr>
+              <tr><td><span class="cmd">HK</span></td><td>Confirmed (নিশ্চিত)</td></tr>
+              <tr><td><span class="cmd">HL</span></td><td>Waitlist (অপেক্ষামাণ)</td></tr>
+              <tr><td><span class="cmd">HN</span></td><td>Need (airline নিশ্চিত নয়)</td></tr>
+              <tr><td><span class="cmd">KK</span></td><td>Airline confirmed</td></tr>
+              <tr><td><span class="cmd">UC</span></td><td>Unable to Confirm</td></tr>
+            </table>
+            <table class="cmd-table">
+              <tr><th>Status</th><th>মানে</th></tr>
+              <tr><td><span class="cmd">NO</span></td><td>No action taken</td></tr>
+              <tr><td><span class="cmd">SC</span></td><td>Schedule Change</td></tr>
+              <tr><td><span class="cmd">TK</span></td><td>Time/equipment change</td></tr>
+              <tr><td><span class="cmd">UN</span></td><td>Unable — not available</td></tr>
+              <tr><td><span class="cmd">WK</span></td><td>Waitlist confirmed</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(3)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(4)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(5)">পরবর্তী →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 5 ═══════ -->
+    <div class="lesson-view" id="view-5">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 05 · Fare Display & Pricing</div>
+        <h2>Fare Display, Pricing ও Tax Calculation</h2>
+        <p>GDS এ fare দেখার পদ্ধতি, fare rules বোঝা, automatic pricing এবং fare calculation করার কৌশল।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(16,185,129,.15)">💰</div> Fare Display Commands (FQD)</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th><th>Example</th></tr>
+            <tr><td><span class="cmd">FQD</span></td><td class="cmd-desc">Fare Quote Display — all fares দেখা</td><td><div class="cmd-ex">FQDDACDXBEK</div></td></tr>
+            <tr><td><span class="cmd">FQD.../OW</span></td><td class="cmd-desc">One Way fares only</td><td><div class="cmd-ex">FQDDACDXBEK/OW</div></td></tr>
+            <tr><td><span class="cmd">FQD.../RT</span></td><td class="cmd-desc">Round Trip fares</td><td><div class="cmd-ex">FQDDACDXBEK/RT</div></td></tr>
+            <tr><td><span class="cmd">FQN</span></td><td class="cmd-desc">Fare Quote Notes — fare rules দেখা</td><td><div class="cmd-ex">FQN1</div></td></tr>
+            <tr><td><span class="cmd">FQP</span></td><td class="cmd-desc">Fare Quote by Passenger type</td><td><div class="cmd-ex">FQPDACDXB/PCHD</div></td></tr>
+            <tr><td><span class="cmd">FXP</span></td><td class="cmd-desc">PNR Pricing — PNR এর fare calculate করা</td><td><div class="cmd-ex">FXP</div></td></tr>
+            <tr><td><span class="cmd">FXPALL</span></td><td class="cmd-desc">Price all passengers</td><td><div class="cmd-ex">FXPALL</div></td></tr>
+          </table>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(240,180,41,.15)">🧮</div> Fare Display Output বোঝা</div>
+          <div class="terminal-wrap">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">FQD — Fare Quote Display Output</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-prompt">></span> <span class="t-cmd">FQDDACDXBEK/OW/CY</span>
+<br>
+<span class="t-header"> ** AMADEUS FARE DISPLAY ** DAC-DXB  EMIRATES</span>
+<br><span class="t-header"> BASIS      OW BDT     FARE BDT  TAX    TOTAL    TVL LAST</span>
+<span class="t-line"></span>
+<span class="t-data"> 1 YLBDAC   Y  15400   15400  3210   18610   15NOV 30NOV</span>
+<span class="t-data"> 2 BLBDAC   B  12800   12800  3210   16010   15NOV 15DEC</span>
+<span class="t-data"> 3 MLBDAC   M  10200   10200  3210   13410   15NOV 31DEC</span>
+<span class="t-data"> 4 HLBDAC   H   8500    8500  3210   11710   15NOV 31JAN</span>
+<span class="t-highlight"> 5 KLBDAC   K   6800    6800  3210    10010   15NOV 31JAN</span>
+<span class="t-data"> 6 LLBDAC   L   5200    5200  3210    8410   15NOV 28FEB</span>
+<br>
+<span class="t-comment">-- BASIS = Fare basis code, OW = One Way fare</span>
+<span class="t-comment">-- Fare + Tax = Total amount in BDT</span>
+<span class="t-comment">-- TVL = Travel must start by this date</span>
+<span class="t-comment">-- LAST = Last date to issue ticket</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(59,130,246,.15)">📜</div> Fare Rules (FQN) বোঝা</div>
+          <p class="body-text">Fare Rules ticket কেনার আগে অবশ্যই পড়তে হয়। Rules বলে দেয় ticket টি changeable কিনা, refundable কিনা, কত penalty দিতে হবে।</p>
+          <div class="terminal-wrap">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">Fare Rules Output</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-prompt">></span> <span class="t-cmd">FQN5</span>
+<span class="t-comment">-- Line 5 এর fare rules দেখুন</span>
+<br>
+<span class="t-header"> FARE RULE: KLBDAC  EK  DAC-DXB</span>
+<span class="t-line"></span>
+<span class="t-data"> CATEGORY 3  - ADVANCE PURCHASE</span>
+<span class="t-data">   MUST BE PURCHASED AT LEAST 07 DAYS BEFORE DEPARTURE</span>
+<span class="t-data"> CATEGORY 5  - MINIMUM STAY</span>
+<span class="t-data">   MINIMUM 02 NIGHTS AT DESTINATION</span>
+<span class="t-data"> CATEGORY 6  - MAXIMUM STAY</span>
+<span class="t-data">   MAXIMUM 01 MONTH</span>
+<span class="t-data"> CATEGORY 16 - PENALTIES</span>
+<span class="t-highlight">   CHANGE: BDT 3500 PER CHANGE, ANYTIME</span>
+<span class="t-warning">   CANCEL: BDT 5000 CANCELLATION FEE</span>
+<span class="t-warning">   NO REFUND AFTER DEPARTURE</span>
+            </div>
+          </div>
+
+          <h3 class="sub">Passenger Type Codes (PTC)</h3>
+          <div class="two-col">
+            <table class="cmd-table">
+              <tr><th>PTC</th><th>মানে</th></tr>
+              <tr><td><span class="cmd">ADT</span></td><td>Adult (12+ বছর)</td></tr>
+              <tr><td><span class="cmd">CNN</span></td><td>Child (2-11 বছর)</td></tr>
+              <tr><td><span class="cmd">INF</span></td><td>Infant (0-23 মাস)</td></tr>
+            </table>
+            <table class="cmd-table">
+              <tr><th>PTC</th><th>মানে</th></tr>
+              <tr><td><span class="cmd">STU</span></td><td>Student fare</td></tr>
+              <tr><td><span class="cmd">SRC</span></td><td>Senior Citizen</td></tr>
+              <tr><td><span class="cmd">SEA</span></td><td>Seaman fare</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(4)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(5)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(6)">পরবর্তী →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 6 ═══════ -->
+    <div class="lesson-view" id="view-6">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 06 · PNR তৈরি</div>
+        <h2>PNR তৈরি — সম্পূর্ণ Step-by-Step Guide</h2>
+        <p>Passenger Name Record (PNR) কী, কীভাবে তৈরি করতে হয়, mandatory elements কী কী এবং সম্পূর্ণ booking workflow।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(239,68,68,.15)">📋</div> PNR কী?</div>
+          <p class="body-text">PNR (Passenger Name Record) হলো GDS এ একটি booking record যা একজন বা একদল যাত্রীর সমস্ত travel information ধারণ করে। প্রতিটি PNR এর একটি unique 6-character alphanumeric code থাকে যাকে <strong>Record Locator</strong> বলে। যেমন: <span class="cmd">XYZ123</span></p>
+
+          <h3 class="sub">PNR এর Mandatory Elements (5টি অবশ্যক)</h3>
+          <div class="step-list">
+            <div class="step-item">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <div class="s-title">Name Element (NM) — যাত্রীর নাম</div>
+                <div class="s-desc">কমপক্ষে একজন যাত্রীর নাম থাকতে হবে। Format: Surname/Firstname Title</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="s-title">Itinerary Element — flight segment</div>
+                <div class="s-desc">কমপক্ষে একটি flight বা segment book থাকতে হবে।</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <div class="s-title">Contact Element (AP) — যোগাযোগ</div>
+                <div class="s-desc">Phone বা email — emergency contact করার জন্য অবশ্যক।</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <div class="s-title">Ticketing Element (TK/TL) — টিকেটিং সময়সীমা</div>
+                <div class="s-desc">Ticket করার শেষ তারিখ বা TKOK (OK to ticket immediately)।</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">5</div>
+              <div class="step-content">
+                <div class="s-title">Received By (RF) — কে বুক করল</div>
+                <div class="s-desc">Travel agent বা passenger এর নাম — কে booking করেছে।</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(16,185,129,.15)">✅</div> Complete PNR তৈরির Demo</div>
+          <div class="terminal-wrap">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">Complete PNR Creation — DAC to DXB</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-comment">-- Step 1: Flight Availability দেখুন</span>
+<span class="t-prompt">></span> <span class="t-cmd">AN15NOVDACDXBEK</span>
+<span class="t-data"> 1 EK 583  Y9 B7 M5 K3  DAC 2115  DXB 0010+1</span>
+<span class="t-data"> 2 EK 585  Y9 B9 M9 K9  DAC 0310  DXB 0540+1</span>
+<br>
+<span class="t-comment">-- Step 2: Seat Book করুন (Line 1, Economy K class, 1 seat)</span>
+<span class="t-prompt">></span> <span class="t-cmd">SS1K1</span>
+<span class="t-data"> RP/DAC/001/SU 15NOV/0001Z  DAC</span>
+<span class="t-data"> 1.EK 583 K 15NOV 7 DACDXB HK1 2115 0010+1</span>
+<br>
+<span class="t-comment">-- Step 3: Passenger নাম যোগ করুন</span>
+<span class="t-prompt">></span> <span class="t-cmd">NM1AHMED/KARIM MR</span>
+<span class="t-data"> 1.AHMED/KARIM MR</span>
+<br>
+<span class="t-comment">-- Step 4: Phone নম্বর যোগ করুন</span>
+<span class="t-prompt">></span> <span class="t-cmd">APDAC-01711234567-M</span>
+<span class="t-data"> AP DAC 01711234567-M</span>
+<br>
+<span class="t-comment">-- Step 5: Ticketing Time Limit দিন</span>
+<span class="t-prompt">></span> <span class="t-cmd">TKOK/20NOV</span>
+<span class="t-data"> TK OK 20NOV/DACACBD</span>
+<br>
+<span class="t-comment">-- Step 6: Received From দিন</span>
+<span class="t-prompt">></span> <span class="t-cmd">RFKARIM</span>
+<br>
+<span class="t-comment">-- Step 7: End & Retrieve করুন</span>
+<span class="t-prompt">></span> <span class="t-cmd">ER</span>
+<br>
+<span class="t-header"> --- RLR ---</span>
+<span class="t-highlight"> RP/DACACBD/DACACBD  AA/SU 15NOV/0001Z  ABCXYZ</span>
+<span class="t-data"> 1.AHMED/KARIM MR</span>
+<span class="t-data"> 2  EK 583 K 15NOV 7 DACDXB HK1 2115 0010+1</span>
+<span class="t-data"> 3  AP DAC 01711234567-M</span>
+<span class="t-data"> 4  TK OK20NOV/DACACBD</span>
+<br>
+<span class="t-highlight">PNR REFERENCE: ABCXYZ ✓</span>
+            </div>
+          </div>
+          <div class="callout tip">
+            <span class="ci">✅</span>
+            <div class="callout-body"><strong>PNR তৈরি হয়ে গেছে!</strong> Record Locator <strong>ABCXYZ</strong> হলো যাত্রীর booking reference যা তিনি airport এ দেখাবেন। এটি airline এর system এও automatically sync হয়।</div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(6,182,212,.15)">👥</div> Multiple Passengers ও Special Services</div>
+          <h3 class="sub" style="margin-top:0">Multiple Passengers</h3>
+          <div class="terminal-wrap">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">Multiple Pax + Child + Infant</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-comment">-- Adult 2 জন, Child 1 জন, Infant 1 জন book করা</span>
+<span class="t-prompt">></span> <span class="t-cmd">SS1K4</span>
+<span class="t-comment">-- 4টি seat book করুন (2 adult + 1 child + infant share করে)</span>
+<br>
+<span class="t-prompt">></span> <span class="t-cmd">NM2AHMED/KARIM MR/FATEMA MRS</span>
+<span class="t-comment">-- 2 adults একসাথে</span>
+<br>
+<span class="t-prompt">></span> <span class="t-cmd">NM1AHMED/RAFI MSTR</span>
+<span class="t-comment">-- Child: MSTR (Master) = ছেলে শিশু, MISS = মেয়ে শিশু</span>
+<br>
+<span class="t-prompt">></span> <span class="t-cmd">NM1AHMED/SARA INF/25MAR24</span>
+<span class="t-comment">-- Infant সহ date of birth</span>
+            </div>
+          </div>
+
+          <h3 class="sub">SSR — Special Service Request</h3>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>SSR Code</th><th>কী জন্য</th></tr>
+            <tr><td><span class="cmd">SRDOCS EK HK1...</span></td><td><span class="cmd">DOCS</span></td><td>Passport তথ্য যোগ</td></tr>
+            <tr><td><span class="cmd">SRVGML EK HK1</span></td><td><span class="cmd">VGML</span></td><td>Vegetarian meal</td></tr>
+            <tr><td><span class="cmd">SRMSML EK HK1</span></td><td><span class="cmd">MSML</span></td><td>Muslim meal (Halal)</td></tr>
+            <tr><td><span class="cmd">SRWCHC EK HK1</span></td><td><span class="cmd">WCHC</span></td><td>Wheelchair</td></tr>
+            <tr><td><span class="cmd">SRVIP EK HK1</span></td><td><span class="cmd">VIP</span></td><td>VIP handling</td></tr>
+          </table>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(5)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(6)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(7)">পরবর্তী →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 7 ═══════ -->
+    <div class="lesson-view" id="view-7">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 07 · Ticketing</div>
+        <h2>Ticketing — E-Ticket Issuance</h2>
+        <p>PNR কে ticket এ convert করার প্রক্রিয়া, TTP command, BSP ticketing এবং e-ticket format।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(240,180,41,.15)">🎫</div> Ticketing Commands</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th><th>Example</th></tr>
+            <tr><td><span class="cmd">TTP</span></td><td class="cmd-desc">Issue Ticket — সম্পূর্ণ PNR ticket করা</td><td><div class="cmd-ex">TTP</div></td></tr>
+            <tr><td><span class="cmd">TTP/P1</span></td><td class="cmd-desc">Passenger 1 এর ticket issue</td><td><div class="cmd-ex">TTP/P1</div></td></tr>
+            <tr><td><span class="cmd">TTP/S2</span></td><td class="cmd-desc">Segment 2 এর জন্য ticket</td><td><div class="cmd-ex">TTP/S2</div></td></tr>
+            <tr><td><span class="cmd">TWD</span></td><td class="cmd-desc">Ticket image display করা</td><td><div class="cmd-ex">TWD</div></td></tr>
+            <tr><td><span class="cmd">TRDC</span></td><td class="cmd-desc">Ticket Record Display</td><td><div class="cmd-ex">TRDC</div></td></tr>
+            <tr><td><span class="cmd">TTVL</span></td><td class="cmd-desc">Ticket void করা</td><td><div class="cmd-ex">TTVLABCXYZ</div></td></tr>
+            <tr><td><span class="cmd">TTRF</span></td><td class="cmd-desc">Refund ticket</td><td><div class="cmd-ex">TTRFABCXYZ</div></td></tr>
+          </table>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(16,185,129,.15)">📄</div> E-Ticket Structure</div>
+          <div class="terminal-wrap">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">E-Ticket Output — TWD Command</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-prompt">></span> <span class="t-cmd">TWD</span>
+<br>
+<span class="t-header"> ELECTRONIC TICKET RECORD</span>
+<span class="t-line"></span>
+<span class="t-data"> TKT: <span class="t-highlight">176-2345678901</span>   ISSUED: 15NOV25</span>
+<span class="t-data"> NAME: AHMED/KARIM MR</span>
+<span class="t-data"> ITIN: EK583/Y 15NOV DACDXB HK</span>
+<span class="t-data"> FARE: BDT 6800  TAX: BDT 3210  TOTAL: BDT 10010</span>
+<span class="t-data"> FOP : CASH</span>
+<span class="t-data"> FBAS: KLBDAC</span>
+<span class="t-data"> VOID: NO  NVB: 15NOV25  NVA: 15DEC25</span>
+<br>
+<span class="t-comment">-- TKT = 13-digit ticket number (176 = EK airline code)</span>
+<span class="t-comment">-- FBAS = Fare Basis Code</span>
+<span class="t-comment">-- NVB = Not Valid Before, NVA = Not Valid After</span>
+<span class="t-comment">-- FOP = Form of Payment (Cash/Credit Card)</span>
+            </div>
+          </div>
+          <div class="callout info">
+            <span class="ci">ℹ️</span>
+            <div class="callout-body"><strong>E-Ticket Number:</strong> প্রতিটি e-ticket এর 13-digit number থাকে। প্রথম 3 digit হলো airline এর IATA numeric code। EK (Emirates) = 176, BG (Biman) = 997, QR (Qatar) = 157।</div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(59,130,246,.15)">🏦</div> BSP — Billing Settlement Plan</div>
+          <p class="body-text">BSP হলো IATA পরিচালিত একটি <strong>payment settlement system</strong> যা travel agencies ও airlines এর মধ্যে ticket sales এর আর্থিক লেনদেন পরিচালনা করে।</p>
+          <div class="two-col">
+            <div>
+              <h3 class="sub">BSP Workflow</h3>
+              <div class="step-list">
+                <div class="step-item" style="padding:10px 14px">
+                  <div class="step-num" style="width:24px;height:24px;font-size:10px">1</div>
+                  <div class="step-content"><div class="s-title" style="font-size:13px">Agent tickets issue করে</div></div>
+                </div>
+                <div class="step-item" style="padding:10px 14px">
+                  <div class="step-num" style="width:24px;height:24px;font-size:10px">2</div>
+                  <div class="step-content"><div class="s-title" style="font-size:13px">BSP data collect করে</div></div>
+                </div>
+                <div class="step-item" style="padding:10px 14px">
+                  <div class="step-num" style="width:24px;height:24px;font-size:10px">3</div>
+                  <div class="step-content"><div class="s-title" style="font-size:13px">Airlines কে payment পাঠায়</div></div>
+                </div>
+                <div class="step-item" style="padding:10px 14px">
+                  <div class="step-num" style="width:24px;height:24px;font-size:10px">4</div>
+                  <div class="step-content"><div class="s-title" style="font-size:13px">Agent commission পায়</div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 class="sub">Form of Payment (FOP)</h3>
+              <table class="cmd-table">
+                <tr><th>Code</th><th>মানে</th></tr>
+                <tr><td><span class="cmd">CA</span></td><td>Cash</td></tr>
+                <tr><td><span class="cmd">CC</span></td><td>Credit Card</td></tr>
+                <tr><td><span class="cmd">CK</span></td><td>Check</td></tr>
+                <tr><td><span class="cmd">MS</span></td><td>Miscellaneous</td></tr>
+              </table>
+              <div style="margin-top:10px">
+                <p class="body-text" style="font-size:12px">Credit card দিয়ে payment এর command:</p>
+                <div class="terminal-wrap">
+                  <div class="terminal-body" style="padding:10px">
+                    <span class="t-cmd">TTP/T-CAVI4111111111111111/D0125</span>
+                    <br><span class="t-comment" style="font-size:11px">-- CA=Visa, Card no., Expiry</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(6)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(7)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(8)">পরবর্তী →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 8 ═══════ -->
+    <div class="lesson-view" id="view-8">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 08 · Queue Management</div>
+        <h2>Queue Management</h2>
+        <p>GDS Queue system কীভাবে কাজ করে, বিভিন্ন queue categories এবং queue থেকে কাজ করার পদ্ধতি।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(6,182,212,.15)">🗂️</div> Queue কী?</div>
+          <p class="body-text">Queue হলো GDS এর একটি <strong>waiting list বা task list</strong>। Airlines বা system automatically বিভিন্ন PNR কে queue তে রাখে যখন কোনো action প্রয়োজন হয়। Travel agent queue check করে প্রতিদিন কাজ করেন।</p>
+          <table class="cmd-table">
+            <tr><th>Queue No.</th><th>কারণ</th></tr>
+            <tr><td><span class="cmd">Q0</span></td><td>General queue — airline messages</td></tr>
+            <tr><td><span class="cmd">Q1</span></td><td>Ticketing due — ticket করার সময় হয়েছে</td></tr>
+            <tr><td><span class="cmd">Q2</span></td><td>Schedule change notifications</td></tr>
+            <tr><td><span class="cmd">Q3</span></td><td>Waitlist confirmed</td></tr>
+            <tr><td><span class="cmd">Q5</span></td><td>Cancellation requests</td></tr>
+          </table>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(240,180,41,.15)">⌨️</div> Queue Commands</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th><th>Example</th></tr>
+            <tr><td><span class="cmd">QC</span></td><td class="cmd-desc">Queue Count — কতটি PNR queue তে আছে</td><td><div class="cmd-ex">QC</div></td></tr>
+            <tr><td><span class="cmd">QD/1</span></td><td class="cmd-desc">Queue Display — নির্দিষ্ট queue দেখা</td><td><div class="cmd-ex">QD/1</div></td></tr>
+            <tr><td><span class="cmd">QN</span></td><td class="cmd-desc">Next item in queue</td><td><div class="cmd-ex">QN</div></td></tr>
+            <tr><td><span class="cmd">QR</span></td><td class="cmd-desc">Remove from queue</td><td><div class="cmd-ex">QR</div></td></tr>
+            <tr><td><span class="cmd">QP</span></td><td class="cmd-desc">Place PNR in queue</td><td><div class="cmd-ex">QP/ABCXYZ/1</div></td></tr>
+          </table>
+          <div class="terminal-wrap" style="margin-top:16px">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">Queue Working Session</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-prompt">></span> <span class="t-cmd">QC</span>
+<span class="t-data"> Q0  : 12 PNR (GENERAL)</span>
+<span class="t-highlight"> Q1  :  5 PNR (TICKETING DUE)</span>
+<span class="t-data"> Q2  :  3 PNR (SCHEDULE CHANGE)</span>
+<br>
+<span class="t-prompt">></span> <span class="t-cmd">QD/1</span>
+<span class="t-comment">-- Queue 1 এর PNR list দেখুন</span>
+<span class="t-data"> 1 ABCXYZ  AHMED/KARIM MR  EK583 15NOV DAC-DXB  TL:20NOV</span>
+<span class="t-data"> 2 DEF456  HASAN/REZA MR   QR638 20NOV DAC-DOH  TL:18NOV</span>
+<br>
+<span class="t-prompt">></span> <span class="t-cmd">RTABCXYZ</span>
+<span class="t-comment">-- PNR open করুন</span>
+<span class="t-prompt">></span> <span class="t-cmd">TTP</span>
+<span class="t-comment">-- Ticket issue করুন</span>
+<span class="t-prompt">></span> <span class="t-cmd">QR</span>
+<span class="t-comment">-- Queue থেকে remove করুন</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(7)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(8)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(9)">পরবর্তী →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 9 ═══════ -->
+    <div class="lesson-view" id="view-9">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 09 · Reissue & Refund</div>
+        <h2>Ticket Reissue, Void ও Refund</h2>
+        <p>Ticket পরিবর্তন করার পদ্ধতি, void করা, refund process এবং penalty calculation।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(245,158,11,.15)">🔄</div> Ticket Reissue কী?</div>
+          <p class="body-text">যখন কোনো ticket issued হওয়ার পরে যাত্রীর flight date, route বা class পরিবর্তন করতে হয়, তখন <strong>Reissue</strong> করতে হয়। নতুন fare ও penalty apply হয়।</p>
+          <div class="two-col">
+            <div>
+              <h3 class="sub">Reissue Process</h3>
+              <div class="step-list">
+                <div class="step-item" style="padding:10px 14px">
+                  <div class="step-num" style="width:24px;height:24px;font-size:10px">1</div>
+                  <div class="step-content"><div class="s-title" style="font-size:13px">PNR Retrieve করুন</div><div class="s-desc" style="font-size:12px">RTABCXYZ</div></div>
+                </div>
+                <div class="step-item" style="padding:10px 14px">
+                  <div class="step-num" style="width:24px;height:24px;font-size:10px">2</div>
+                  <div class="step-content"><div class="s-title" style="font-size:13px">Old segment cancel করুন</div><div class="s-desc" style="font-size:12px">XE2 (erase segment 2)</div></div>
+                </div>
+                <div class="step-item" style="padding:10px 14px">
+                  <div class="step-num" style="width:24px;height:24px;font-size:10px">3</div>
+                  <div class="step-content"><div class="s-title" style="font-size:13px">New segment add করুন</div><div class="s-desc" style="font-size:12px">SS EK583 K 20NOV DACDXB HK1</div></div>
+                </div>
+                <div class="step-item" style="padding:10px 14px">
+                  <div class="step-num" style="width:24px;height:24px;font-size:10px">4</div>
+                  <div class="step-content"><div class="s-title" style="font-size:13px">Reissue ticket করুন</div><div class="s-desc" style="font-size:12px">TTP/ETKT + penalty collect</div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 class="sub">Void vs Refund</h3>
+              <table class="cmd-table">
+                <tr><th>বিষয়</th><th>Void</th><th>Refund</th></tr>
+                <tr><td>সময়</td><td>Departure এর আগে, same BSP reporting period</td><td>যেকোনো সময়</td></tr>
+                <tr><td>Penalty</td><td>সাধারণত নেই</td><td>Fare rules অনুযায়ী</td></tr>
+                <tr><td>Command</td><td>TTVL</td><td>TTRF</td></tr>
+                <tr><td>System</td><td>GDS তে instantly</td><td>BSP তে submit</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(239,68,68,.15)">↩️</div> Refund Commands</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th><th>Example</th></tr>
+            <tr><td><span class="cmd">TTVL</span></td><td class="cmd-desc">Void ticket — cancel করা (same day)</td><td><div class="cmd-ex">TTVL1762345678901</div></td></tr>
+            <tr><td><span class="cmd">TTRF</span></td><td class="cmd-desc">Refund application submit করা</td><td><div class="cmd-ex">TTRF1762345678901</div></td></tr>
+            <tr><td><span class="cmd">TWC</span></td><td class="cmd-desc">Ticket waiver/compromise request</td><td><div class="cmd-ex">TWC</div></td></tr>
+            <tr><td><span class="cmd">XE</span></td><td class="cmd-desc">Cancel specific segment</td><td><div class="cmd-ex">XE2</div></td></tr>
+            <tr><td><span class="cmd">XN</span></td><td class="cmd-desc">Cancel name element</td><td><div class="cmd-ex">XN1</div></td></tr>
+          </table>
+          <div class="callout warn">
+            <span class="ci">⚠️</span>
+            <div class="callout-body"><strong>সাবধান:</strong> Ticket void শুধুমাত্র সেই BSP reporting period এ করা যায় যে period এ issue হয়েছে। Bangladesh BSP তে সাধারণত same day বা পরেরদিন void করার সুযোগ থাকে।</div>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(8)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(9)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(10)">পরবর্তী →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 10 ═══════ -->
+    <div class="lesson-view" id="view-10">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 10 · Hotel & Car</div>
+        <h2>Hotel ও Car Rental Booking</h2>
+        <p>Amadeus GDS দিয়ে hotel reservation এবং car rental booking করার পদ্ধতি।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(139,92,246,.15)">🏨</div> Hotel Booking Commands</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th><th>Example</th></tr>
+            <tr><td><span class="cmd">HOA</span></td><td class="cmd-desc">Hotel Availability — hotel খোঁজা</td><td><div class="cmd-ex">HOADXB/15NOV/2NT</div></td></tr>
+            <tr><td><span class="cmd">HOD</span></td><td class="cmd-desc">Hotel Display — বিস্তারিত দেখা</td><td><div class="cmd-ex">HOD1</div></td></tr>
+            <tr><td><span class="cmd">HOM</span></td><td class="cmd-desc">Hotel More — আরো hotels</td><td><div class="cmd-ex">HOM</div></td></tr>
+            <tr><td><span class="cmd">HOI</span></td><td class="cmd-desc">Hotel room availability by property</td><td><div class="cmd-ex">HOI/HH/DXBHIL</div></td></tr>
+            <tr><td><span class="cmd">HOSS</span></td><td class="cmd-desc">Hotel Sell — room book করা</td><td><div class="cmd-ex">HOSS1A/MK1</div></td></tr>
+          </table>
+
+          <div class="terminal-wrap" style="margin-top:16px">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">Hotel Booking Demo</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-prompt">></span> <span class="t-cmd">HOADXB/15NOV/2NT/BB</span>
+<span class="t-comment">-- DXB তে 15NOV check-in, 2 nights, Breakfast included</span>
+<br>
+<span class="t-header"> HOTEL AVAILABILITY DUBAI</span>
+<span class="t-line"></span>
+<span class="t-data"> 1 HH HILTON DUBAI CREEK      5* USD 185 BB K1</span>
+<span class="t-data"> 2 MC MARRIOTT DOWNTOWN       5* USD 210 BB K1</span>
+<span class="t-data"> 3 HY HYATT REGENCY DUBAI     5* USD 165 BB K1</span>
+<span class="t-data"> 4 BW BEST WESTERN PREMIER    4* USD  95 BB K1</span>
+<br>
+<span class="t-prompt">></span> <span class="t-cmd">HOSS1A/MK1</span>
+<span class="t-comment">-- Line 1, Room type A, 1 room book করুন</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(16,185,129,.15)">🚗</div> Car Rental Booking</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th></tr>
+            <tr><td><span class="cmd">CA</span></td><td class="cmd-desc">Car Availability display</td></tr>
+            <tr><td><span class="cmd">CAL</span></td><td class="cmd-desc">Car location display</td></tr>
+            <tr><td><span class="cmd">CASS</span></td><td class="cmd-desc">Car Sell — booking করা</td></tr>
+          </table>
+          <div class="callout tip">
+            <span class="ci">💡</span>
+            <div class="callout-body"><strong>Bangladesh Context:</strong> Bangladesh থেকে international bookings এ hotel ও car করা হয় বেশি। Inbound tourists এর জন্য GDS hotel booking বাংলাদেশের agencies ব্যবহার করে।</div>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(9)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(10)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(11)">পরবর্তী →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 11 — SABRE ═══════ -->
+    <div class="lesson-view" id="view-11">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 11 · Sabre GDS</div>
+        <h2>Sabre GDS — Red 360 Platform</h2>
+        <p>Sabre GDS এর commands, Amadeus এর সাথে পার্থক্য এবং Sabre specific features।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(239,68,68,.15)">🔴</div> Sabre vs Amadeus তুলনা</div>
+          <table class="cmd-table">
+            <tr><th>কাজ</th><th>Amadeus</th><th>Sabre</th></tr>
+            <tr><td>Availability</td><td><span class="cmd">AN15NOVDACDXB</span></td><td><span class="cmd">115NOVDACDXB</span></td></tr>
+            <tr><td>Sell segment</td><td><span class="cmd">SS1K1</span></td><td><span class="cmd">0K1</span></td></tr>
+            <tr><td>Add name</td><td><span class="cmd">NM1AHMED/KARIM</span></td><td><span class="cmd">-AHMED/KARIM MR</span></td></tr>
+            <tr><td>Phone</td><td><span class="cmd">APDAC-0171...</span></td><td><span class="cmd">9DAC-0171...</span></td></tr>
+            <tr><td>Ticketing limit</td><td><span class="cmd">TKOK/20NOV</span></td><td><span class="cmd">7T-A20NOV</span></td></tr>
+            <tr><td>End & receive</td><td><span class="cmd">ER</span></td><td><span class="cmd">E</span></td></tr>
+            <tr><td>Retrieve PNR</span></td><td><span class="cmd">RTXYZ123</span></td><td><span class="cmd">*XYZ123</span></td></tr>
+            <tr><td>Fare display</td><td><span class="cmd">FQD</span></td><td><span class="cmd">FQDACDXB</span></td></tr>
+            <tr><td>Issue ticket</td><td><span class="cmd">TTP</span></td><td><span class="cmd">W¥TKP</span></td></tr>
+            <tr><td>Ignore</td><td><span class="cmd">IG</span></td><td><span class="cmd">I</span></td></tr>
+          </table>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(59,130,246,.15)">📖</div> Sabre Specific Commands</div>
+          <table class="cmd-table">
+            <tr><th>Command</th><th>কাজ</th><th>Example</th></tr>
+            <tr><td><span class="cmd">1</span></td><td class="cmd-desc">Availability display (date prefix)</td><td><div class="cmd-ex">115NOVDACDXBEK</div></td></tr>
+            <tr><td><span class="cmd">A</span></td><td class="cmd-desc">Alternate date availability</td><td><div class="cmd-ex">A16NOV</div></td></tr>
+            <tr><td><span class="cmd">FQ</span></td><td class="cmd-desc">Fare Quote</td><td><div class="cmd-ex">FQDACDXB</div></td></tr>
+            <tr><td><span class="cmd">FQR</span></td><td class="cmd-desc">Fare rules</td><td><div class="cmd-ex">FQR1</div></td></tr>
+            <tr><td><span class="cmd">WPNC</span></td><td class="cmd-desc">Pricing with lowest fare</td><td><div class="cmd-ex">WPNC</div></td></tr>
+            <tr><td><span class="cmd">*B</span></td><td class="cmd-desc">Display itinerary</td><td><div class="cmd-ex">*B</div></td></tr>
+            <tr><td><span class="cmd">*N</span></td><td class="cmd-desc">Display names</td><td><div class="cmd-ex">*N</div></td></tr>
+            <tr><td><span class="cmd">XI</span></td><td class="cmd-desc">Cancel all segments</td><td><div class="cmd-ex">XI</div></td></tr>
+          </table>
+
+          <div class="terminal-wrap" style="margin-top:16px">
+            <div class="terminal-bar">
+              <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+              <div class="t-title">Sabre — Complete PNR Creation</div>
+            </div>
+            <div class="terminal-body">
+<span class="t-comment">-- Sabre: Complete PNR Example</span>
+<span class="t-prompt">:</span> <span class="t-cmd">115NOVDACDXBEK</span>
+<span class="t-data"> 1  EK 583Y 15NOV TH DACDXB SS     2115 0010+1 E</span>
+<br>
+<span class="t-prompt">:</span> <span class="t-cmd">0K1</span>
+<span class="t-comment">-- K class, 1 seat sell</span>
+<br>
+<span class="t-prompt">:</span> <span class="t-cmd">-AHMED/KARIM MR</span>
+<span class="t-comment">-- Name add</span>
+<br>
+<span class="t-prompt">:</span> <span class="t-cmd">9DAC-01711234567</span>
+<span class="t-comment">-- Phone</span>
+<br>
+<span class="t-prompt">:</span> <span class="t-cmd">7T-A20NOV</span>
+<span class="t-comment">-- Ticketing time limit</span>
+<br>
+<span class="t-prompt">:</span> <span class="t-cmd">E</span>
+<span class="t-comment">-- End record</span>
+<span class="t-highlight"> RECORD LOCATOR: GHIJKL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(10)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(11)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(12)">Live Simulator →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 12 — SIMULATOR ═══════ -->
+    <div class="lesson-view" id="view-12">
+      <div class="lesson-header">
+        <div class="breadcrumb">Module 12 · Interactive Practice</div>
+        <h2>🖥️ Live GDS Command Simulator</h2>
+        <p>Real GDS commands practice করুন। Type করুন এবং Enter চাপুন। নিচে supported commands দেওয়া আছে।</p>
+      </div>
+      <div class="lesson-body">
+
+        <div class="interactive-terminal">
+          <div class="int-terminal-bar">
+            <div class="live-badge">
+              <div class="live-dot"></div>
+              AMADEUS GDS SIMULATOR — LIVE
+            </div>
+            <div style="flex:1"></div>
+            <button onclick="clearTerm()" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5;padding:4px 10px;border-radius:5px;font-size:11px;cursor:pointer;font-family:var(--mono)">CLEAR</button>
+          </div>
+          <div class="int-output" id="term-output">
+<span style="color:#4ade80">AMADEUS CRYPTIC INTERFACE v7.3</span><br>
+<span style="color:#475569">COPYRIGHT AMADEUS IT GROUP S.A.</span><br>
+<span style="color:#475569">SIGN-IN: DACACBD/SU — OFFICE: DHAKA BANGLADESH</span><br>
+<br>
+<span style="color:#60a5fa">SUPPORTED COMMANDS (type and press ENTER):</span><br>
+<span style="color:#94a3b8">  AN15NOVDACDXB  · AN15NOVDACDXBEK  · AN15NOVDACLHR</span><br>
+<span style="color:#94a3b8">  FQDDACDXBEK   · FQDDACDOQ        · SS1K1</span><br>
+<span style="color:#94a3b8">  NM1AHMED/KARIM MR               · APDAC-01711234567</span><br>
+<span style="color:#94a3b8">  TKOK/20NOV    · ER               · IG</span><br>
+<span style="color:#94a3b8">  RTABCXYZ      · TTP              · QC</span><br>
+<span style="color:#94a3b8">  HELP          · CLEAR</span><br>
+<br>
+<span style="color:#f0b429">></span> <span style="color:#94a3b8">Ready. Type a command...</span><br>
+          </div>
+          <div class="int-input-row">
+            <span class="int-prompt-sym">›</span>
+            <input class="int-input" id="term-input" placeholder="type command here... (e.g. AN15NOVDACDXB)" autocomplete="off" spellcheck="false" onkeydown="handleKey(event)">
+            <button class="btn-run" onclick="runCmd()">ENTER</button>
+          </div>
+        </div>
+
+        <div class="theory-box" style="margin-top:20px">
+          <div class="box-title"><div class="icon" style="background:rgba(16,185,129,.15)">📚</div> Practice Exercises</div>
+          <div class="step-list">
+            <div class="step-item">
+              <div class="step-num">A</div>
+              <div class="step-content">
+                <div class="s-title">Exercise 1: Availability Check</div>
+                <div class="s-desc">Type: <span class="tag gold">AN15NOVDACDXB</span> — সব airlines এর availability দেখুন। তারপর <span class="tag gold">AN15NOVDACDXBEK</span> দিয়ে শুধু Emirates দেখুন।</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">B</div>
+              <div class="step-content">
+                <div class="s-title">Exercise 2: Fare Display</div>
+                <div class="s-desc">Type: <span class="tag gold">FQDDACDXBEK</span> — Emirates এর DAC-DXB fares দেখুন।</div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">C</div>
+              <div class="step-content">
+                <div class="s-title">Exercise 3: PNR তৈরি করুন</div>
+                <div class="s-desc">এই sequence follow করুন: <span class="tag gold">SS1K1</span> → <span class="tag gold">NM1AHMED/KARIM MR</span> → <span class="tag gold">APDAC-01711234567</span> → <span class="tag gold">TKOK/20NOV</span> → <span class="tag gold">ER</span></div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">D</div>
+              <div class="step-content">
+                <div class="s-title">Exercise 4: PNR Retrieve</div>
+                <div class="s-desc">Type: <span class="tag gold">RTABCXYZ</span> — saved PNR retrieve করুন।</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(11)">← আগের</button>
+          <button class="complete-btn" onclick="markDone(12)">✓ সম্পন্ন</button>
+          <button class="nav-btn primary" onclick="showLesson(13)">Reference Card →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ LESSON 13 — QUICK REF ═══════ -->
+    <div class="lesson-view" id="view-13">
+      <div class="lesson-header">
+        <div class="breadcrumb">Reference · Quick Card</div>
+        <h2>📖 Quick Reference Card</h2>
+        <p>সব গুরুত্বপূর্ণ commands একসাথে — print করে রাখুন বা bookmark করুন।</p>
+      </div>
+      <div class="lesson-body">
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(240,180,41,.15)">⚡</div> Amadeus — Complete Command Cheatsheet</div>
+
+          <h3 class="sub">Availability & Schedules</h3>
+          <table class="cmd-table">
+            <tr><td><span class="cmd">AN15NOVDACDXB</span></td><td class="cmd-desc">All airlines availability DAC→DXB 15NOV</td></tr>
+            <tr><td><span class="cmd">AN15NOVDACDXBEK</span></td><td class="cmd-desc">Emirates only availability</td></tr>
+            <tr><td><span class="cmd">AN.../CY</span></td><td class="cmd-desc">Economy class only</td></tr>
+            <tr><td><span class="cmd">SDDACDXB</span></td><td class="cmd-desc">Schedule display</td></tr>
+            <tr><td><span class="cmd">FNEK583/15NOV</span></td><td class="cmd-desc">Flight information</td></tr>
+          </table>
+
+          <h3 class="sub">Fare Display</h3>
+          <table class="cmd-table">
+            <tr><td><span class="cmd">FQDDACDXBEK</span></td><td class="cmd-desc">All EK fares DAC-DXB</td></tr>
+            <tr><td><span class="cmd">FQDDACDXB/OW</span></td><td class="cmd-desc">One way fares</td></tr>
+            <tr><td><span class="cmd">FQN1</span></td><td class="cmd-desc">Fare rules for line 1</td></tr>
+            <tr><td><span class="cmd">FXP</span></td><td class="cmd-desc">Price current PNR</td></tr>
+          </table>
+
+          <h3 class="sub">PNR তৈরি</h3>
+          <table class="cmd-table">
+            <tr><td><span class="cmd">SS1K1</span></td><td class="cmd-desc">Sell line 1, class K, 1 seat</td></tr>
+            <tr><td><span class="cmd">NM1AHMED/KARIM MR</span></td><td class="cmd-desc">Add adult name</td></tr>
+            <tr><td><span class="cmd">NM1SMITH/JANE MSTR</span></td><td class="cmd-desc">Add child name</td></tr>
+            <tr><td><span class="cmd">APDAC-01711234567</span></td><td class="cmd-desc">Add phone contact</td></tr>
+            <tr><td><span class="cmd">TKOK/20NOV</span></td><td class="cmd-desc">Ticket time limit 20NOV</td></tr>
+            <tr><td><span class="cmd">ER</span></td><td class="cmd-desc">End & Retrieve PNR</td></tr>
+            <tr><td><span class="cmd">ET</span></td><td class="cmd-desc">End Transaction</td></tr>
+            <tr><td><span class="cmd">IG</span></td><td class="cmd-desc">Ignore changes</td></tr>
+          </table>
+
+          <h3 class="sub">PNR Display & Modification</h3>
+          <table class="cmd-table">
+            <tr><td><span class="cmd">RTXYZ123</span></td><td class="cmd-desc">Retrieve PNR XYZ123</td></tr>
+            <tr><td><span class="cmd">*R</span></td><td class="cmd-desc">Redisplay PNR</td></tr>
+            <tr><td><span class="cmd">XE2</span></td><td class="cmd-desc">Cancel segment 2</td></tr>
+            <tr><td><span class="cmd">XN1</span></td><td class="cmd-desc">Cancel name 1</td></tr>
+          </table>
+
+          <h3 class="sub">Ticketing</h3>
+          <table class="cmd-table">
+            <tr><td><span class="cmd">TTP</span></td><td class="cmd-desc">Issue ticket for all</td></tr>
+            <tr><td><span class="cmd">TTP/P1</span></td><td class="cmd-desc">Ticket passenger 1 only</td></tr>
+            <tr><td><span class="cmd">TWD</span></td><td class="cmd-desc">Display ticket record</td></tr>
+            <tr><td><span class="cmd">TTVL176XXXXXXXXXX</span></td><td class="cmd-desc">Void ticket</td></tr>
+            <tr><td><span class="cmd">TTRF176XXXXXXXXXX</span></td><td class="cmd-desc">Refund ticket</td></tr>
+          </table>
+
+          <h3 class="sub">Queue Management</h3>
+          <table class="cmd-table">
+            <tr><td><span class="cmd">QC</span></td><td class="cmd-desc">Queue count</td></tr>
+            <tr><td><span class="cmd">QD/1</span></td><td class="cmd-desc">Display queue 1</td></tr>
+            <tr><td><span class="cmd">QN</span></td><td class="cmd-desc">Next queue item</td></tr>
+            <tr><td><span class="cmd">QR</span></td><td class="cmd-desc">Remove from queue</td></tr>
+          </table>
+
+          <h3 class="sub">Special Services</h3>
+          <table class="cmd-table">
+            <tr><td><span class="cmd">SRMSML EK HK1</span></td><td class="cmd-desc">Muslim/Halal meal</td></tr>
+            <tr><td><span class="cmd">SRVGML EK HK1</span></td><td class="cmd-desc">Vegetarian meal</td></tr>
+            <tr><td><span class="cmd">SRWCHC EK HK1</span></td><td class="cmd-desc">Wheelchair</td></tr>
+            <tr><td><span class="cmd">SRDOCS EK HK1/P/BGD/...</span></td><td class="cmd-desc">Passport details</td></tr>
+          </table>
+        </div>
+
+        <div class="theory-box">
+          <div class="box-title"><div class="icon" style="background:rgba(239,68,68,.15)">🔴</div> Sabre Quick Reference</div>
+          <table class="cmd-table">
+            <tr><th>কাজ</th><th>Sabre Command</th></tr>
+            <tr><td>Availability</td><td><span class="cmd">115NOVDACDXB</span></td></tr>
+            <tr><td>Sell</td><td><span class="cmd">0K1</span></td></tr>
+            <tr><td>Name</td><td><span class="cmd">-AHMED/KARIM MR</span></td></tr>
+            <tr><td>Phone</td><td><span class="cmd">9DAC-01711234567</span></td></tr>
+            <tr><td>TL</td><td><span class="cmd">7T-A20NOV</span></td></tr>
+            <tr><td>End</td><td><span class="cmd">E</span></td></tr>
+            <tr><td>Retrieve</td><td><span class="cmd">*XYZ123</span></td></tr>
+            <tr><td>Ignore</td><td><span class="cmd">I</span></td></tr>
+            <tr><td>Pricing</td><td><span class="cmd">WPNC</span></td></tr>
+            <tr><td>Ticket</td><td><span class="cmd">W¥TKP</span></td></tr>
+          </table>
+        </div>
+
+        <div class="callout tip" style="margin-top:20px">
+          <span class="ci">🎓</span>
+          <div class="callout-body"><strong>কোর্স সম্পন্ন!</strong> আপনি Air Ticketing GDS Course এর সব modules শেষ করেছেন। Professional GDS operator হতে হলে এখন real system এ practice করুন। Bangladesh এ IATA authorized training center থেকে official certification নিতে পারেন।</div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" onclick="showLesson(12)">← Simulator</button>
+          <button class="nav-btn primary" onclick="showHome()">🏠 Course Home</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<script>
+// ─── STATE ───
+const completed = new Set();
+const TOTAL = 13;
+let pnrBuilt = false;
+let lastSell = false;
+let nameAdded = false;
+let pnrRef = 'ABCXYZ';
+
+// ─── NAVIGATION ───
+function showHome() {
+  document.querySelectorAll('.lesson-view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-home').style.display = 'block';
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('nav-home').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showLesson(n) {
+  document.getElementById('view-home').style.display = 'none';
+  document.querySelectorAll('.lesson-view').forEach(v => v.classList.remove('active'));
+  const v = document.getElementById('view-' + n);
+  if (v) { v.classList.add('active'); }
+  document.querySelectorAll('.nav-item').forEach(ni => ni.classList.remove('active'));
+  const nav = document.getElementById('nav-' + n);
+  if (nav) nav.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function markDone(n) {
+  completed.add(n);
+  const nn = document.getElementById('nn-' + n);
+  const navItem = document.getElementById('nav-' + n);
+  if (nn) nn.textContent = '✓';
+  if (navItem) navItem.classList.add('completed');
+  const btn = document.querySelector('#view-' + n + ' .complete-btn');
+  if (btn) { btn.classList.add('done'); btn.textContent = '✓ সম্পন্ন হয়েছে'; }
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = Math.round((completed.size / TOTAL) * 100);
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-bar').style.width = pct + '%';
+}
+
+// ─── QUIZ ───
+function checkQ(el, type) {
+  const opts = el.parentElement.querySelectorAll('.quiz-opt');
+  opts.forEach(o => { o.onclick = null; o.style.pointerEvents = 'none'; });
+  const res = el.closest('.quiz-box').querySelector('.quiz-result');
+  if (type === 'c') {
+    el.classList.add('correct');
+    res.classList.add('show', 'pass');
+    res.textContent = '✅ সঠিক! Global Distribution System — এটি airlines, hotels ও travel agencies কে সংযুক্ত করার কেন্দ্রীয় platform।';
+  } else {
+    el.classList.add('wrong');
+    opts.forEach(o => { if (o.dataset && o !== el) {} });
+    res.classList.add('show', 'fail');
+    res.textContent = '❌ ভুল উত্তর! সঠিক উত্তর হলো: Global Distribution System';
+  }
+}
+
+// ─── ACCORDION ───
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.accordion-head')) {
+    const head = e.target.closest('.accordion-head');
+    const body = head.nextElementSibling;
+    head.classList.toggle('open');
+    if (body) body.classList.toggle('open');
+  }
+});
+
+// ─── TERMINAL SIMULATOR ───
+const responses = {
+  'AN15NOVDACDXB': () => `<span style="color:#60a5fa"> ** AMADEUS AVAILABILITY ** DAC DHAKA.BD     15NOV TUE</span><br>
+<span style="color:#94a3b8"> 1 EK</span><span style="color:#e2e8f0"> 585 J9 C7 D2 I0 Y9 B9 M9 H9 K9  DAC  0310  DXB  0540+1  773  0</span><br>
+<span style="color:#e2e8f0"> 2 EK  583 J7 C5 D2 I0 Y9 B7 M5 H3 K2  DAC  2115  DXB  0010+1  773  0</span><br>
+<span style="color:#e2e8f0"> 3 BG  049 J2 C0 D0 I0 Y9 B6 M4 H2 K0  DAC  2300  DXB  0300+1  738  0</span><br>
+<span style="color:#e2e8f0"> 4 QR  638 J4 C2 D0 I0 Y8 B6 M4 H2 K2  DAC  1800  DOH  2100    77W  0</span><br>
+<span style="color:#e2e8f0"> 5 SQ  436 J6 C4 D0 I0 Y9 B8 M7 H5 K3  DAC  2345  SIN  0640+1  773  0</span><br>
+<span style="color:#475569">-- J=Business, Y=Economy, numbers=seats available, 0=closed</span>`,
+
+  'AN15NOVDACDXBEK': () => `<span style="color:#60a5fa"> ** AMADEUS AVAILABILITY ** DAC DHAKA.BD  15NOV EK EMIRATES</span><br>
+<span style="color:#e2e8f0"> 1 EK 585 J9 C7 D2 I0 Y9 B9 M9 H9 K9  DAC 0310  DXB 0540+1  773</span><br>
+<span style="color:#e2e8f0"> 2 EK 583 J7 C5 D2 I0 Y9 B7 M5 H3 <span style="color:#f0b429">K2</span>  DAC 2115  DXB 0010+1  773</span><br>
+<span style="color:#475569">-- 2 flights found for EK on 15NOV DAC-DXB</span>`,
+
+  'AN15NOVDACLHR': () => `<span style="color:#60a5fa"> ** AVAILABILITY ** DAC-LHR 15NOV</span><br>
+<span style="color:#e2e8f0"> 1 BG 207 J2 C0 Y9 B7 M5  DAC 2100  LHR 0500+1  789  VIA DXB</span><br>
+<span style="color:#e2e8f0"> 2 EK 583 J7 Y9 K2  DAC 2115  DXB 0010+1 / EK 003 Y9  DXB 0830  LHR 1305</span><br>
+<span style="color:#e2e8f0"> 3 QR 638 J4 Y8 K2  DAC 1800  DOH 2100   / QR 001 Y9  DOH 0205+1 LHR 0640+1</span>`,
+
+  'FQDDACDXBEK': () => `<span style="color:#60a5fa"> ** AMADEUS FARE DISPLAY ** DAC-DXB EK ROUND TRIP</span><br>
+<span style="color:#60a5fa"> BASIS       OW BDT     RT BDT    TAX BDT  TOTAL BDT</span><br>
+<span style="color:#94a3b8">─────────────────────────────────────────────────────</span><br>
+<span style="color:#e2e8f0"> 1 YLBDAC    Y  18500   37000    3210    40210   30NOV</span><br>
+<span style="color:#e2e8f0"> 2 BLBDAC    B  15200   30400    3210    33610   15DEC</span><br>
+<span style="color:#e2e8f0"> 3 MLBDAC    M  11800   23600    3210    26810   31DEC</span><br>
+<span style="color:#e2e8f0"> 4 HLBDAC    H   9200   18400    3210    21610   31JAN</span><br>
+<span style="color:#f0b429"> 5 KLBDAC    K   6800   13600    3210    16810   31JAN ← BEST</span><br>
+<span style="color:#e2e8f0"> 6 LLBDAC    L   5200   10400    3210    13610   28FEB</span><br>
+<span style="color:#475569">-- TYPE FQN1..FQN6 TO VIEW FARE RULES</span>`,
+
+  'FQDDACDOH': () => `<span style="color:#60a5fa"> ** FARE DISPLAY ** DAC-DOH QR ROUND TRIP</span><br>
+<span style="color:#e2e8f0"> 1 YLBDAC  Y  16200  32400  3050  35450</span><br>
+<span style="color:#f0b429"> 2 KLBDAC  K   5900  11800  3050  14850 ← BEST DEAL</span><br>
+<span style="color:#e2e8f0"> 3 LLBDAC  L   4800   9600  3050  12650</span>`,
+
+  'SS1K1': () => {
+    lastSell = true;
+    return `<span style="color:#94a3b8"> RP/DAC/001/SU 15NOV/0001Z  DAC</span><br>
+<span style="color:#4ade80"> 1.EK 583 K 15NOV 7 DACDXB <span style="color:#f0b429">HK1</span> 2115 0010+1</span><br>
+<span style="color:#475569">-- SEGMENT SOLD. HK = Confirmed. Now add passenger name.</span>`;
+  },
+
+  'NM1AHMED/KARIM MR': () => {
+    nameAdded = true;
+    return `<span style="color:#4ade80"> 1.AHMED/KARIM MR</span><br>
+<span style="color:#475569">-- Name element added successfully.</span>`;
+  },
+
+  'APDAC-01711234567': () => `<span style="color:#4ade80"> AP DAC 01711234567-M</span><br>
+<span style="color:#475569">-- Contact element added.</span>`,
+
+  'TKOK/20NOV': () => `<span style="color:#4ade80"> TK OK 20NOV/DACACBD</span><br>
+<span style="color:#475569">-- Ticketing time limit set to 20NOV.</span>`,
+
+  'ER': () => {
+    pnrBuilt = true;
+    return `<span style="color:#94a3b8">--- RLR ---</span><br>
+<span style="color:#f0b429"> RP/DACACBD/DACACBD  AA/SU 15NOV/0001Z  <span style="color:#4ade80">ABCXYZ</span></span><br>
+<span style="color:#e2e8f0"> 1.AHMED/KARIM MR</span><br>
+<span style="color:#e2e8f0"> 2  EK 583 K 15NOV 7 DACDXB HK1 2115 0010+1 E0/DAC</span><br>
+<span style="color:#e2e8f0"> 3  AP DAC 01711234567-M</span><br>
+<span style="color:#e2e8f0"> 4  TK OK20NOV/DACACBD</span><br>
+<span style="color:#4ade80">✓ PNR SAVED. RECORD LOCATOR: ABCXYZ</span>`;
+  },
+
+  'RTABCXYZ': () => `<span style="color:#94a3b8">--- RLR ---</span><br>
+<span style="color:#f0b429"> RP/DACACBD/DACACBD  AA/SU 15NOV/0001Z  ABCXYZ</span><br>
+<span style="color:#e2e8f0"> 1.AHMED/KARIM MR</span><br>
+<span style="color:#e2e8f0"> 2  EK 583 K 15NOV 7 DACDXB HK1 2115 0010+1</span><br>
+<span style="color:#e2e8f0"> 3  AP DAC 01711234567-M</span><br>
+<span style="color:#e2e8f0"> 4  TK OK20NOV/DACACBD</span>`,
+
+  'TTP': () => pnrBuilt
+    ? `<span style="color:#4ade80"> TICKET ISSUED SUCCESSFULLY</span><br>
+<span style="color:#e2e8f0"> TKT: <span style="color:#f0b429">176-2345678901</span></span><br>
+<span style="color:#e2e8f0"> PAX: AHMED/KARIM MR</span><br>
+<span style="color:#e2e8f0"> FARE: BDT 6800 + TAX 3210 = TOTAL BDT 10010</span><br>
+<span style="color:#e2e8f0"> FOP: CA (CASH)</span>`
+    : `<span style="color:#f87171"> ERROR: NO ACTIVE PNR. Retrieve PNR first: RTABCXYZ</span>`,
+
+  'QC': () => `<span style="color:#60a5fa"> QUEUE COUNT — OFFICE DACACBD</span><br>
+<span style="color:#e2e8f0"> Q0  : 12 PNR — GENERAL MESSAGES</span><br>
+<span style="color:#f0b429"> Q1  :  5 PNR — TICKETING DUE</span><br>
+<span style="color:#e2e8f0"> Q2  :  3 PNR — SCHEDULE CHANGES</span><br>
+<span style="color:#e2e8f0"> Q3  :  2 PNR — WAITLIST CONFIRMED</span>`,
+
+  'IG': () => `<span style="color:#94a3b8"> CHANGES IGNORED. PNR NOT MODIFIED.</span>`,
+
+  'HELP': () => `<span style="color:#60a5fa"> AVAILABLE COMMANDS:</span><br>
+<span style="color:#e2e8f0"> AN15NOVDACDXB    — Availability all airlines</span><br>
+<span style="color:#e2e8f0"> AN15NOVDACDXBEK  — Availability Emirates only</span><br>
+<span style="color:#e2e8f0"> AN15NOVDACLHR    — Availability DAC to London</span><br>
+<span style="color:#e2e8f0"> FQDDACDXBEK      — Fare display EK</span><br>
+<span style="color:#e2e8f0"> FQDDACDOH        — Fare display QR</span><br>
+<span style="color:#e2e8f0"> SS1K1            — Sell line 1 class K 1 pax</span><br>
+<span style="color:#e2e8f0"> NM1AHMED/KARIM MR — Add name</span><br>
+<span style="color:#e2e8f0"> APDAC-01711234567 — Add phone</span><br>
+<span style="color:#e2e8f0"> TKOK/20NOV       — Ticketing time limit</span><br>
+<span style="color:#e2e8f0"> ER               — End & Retrieve PNR</span><br>
+<span style="color:#e2e8f0"> RTABCXYZ         — Retrieve saved PNR</span><br>
+<span style="color:#e2e8f0"> TTP              — Issue ticket</span><br>
+<span style="color:#e2e8f0"> QC               — Queue count</span><br>
+<span style="color:#e2e8f0"> IG               — Ignore changes</span><br>
+<span style="color:#e2e8f0"> CLEAR            — Clear screen</span>`,
+};
+
+function clearTerm() {
+  document.getElementById('term-output').innerHTML = '<span style="color:#4ade80">SCREEN CLEARED.</span><br><span style="color:#f0b429">></span> <span style="color:#475569">Ready...</span><br>';
+}
+
+function runCmd() {
+  const input = document.getElementById('term-input');
+  const cmd = input.value.trim().toUpperCase();
+  if (!cmd) return;
+  const out = document.getElementById('term-output');
+  const prompt = `<span style="color:#f0b429">></span> <span style="color:#fbbf24">${cmd}</span><br>`;
+  let resp = '';
+  if (cmd === 'CLEAR') { clearTerm(); input.value = ''; return; }
+  if (responses[cmd]) {
+    resp = responses[cmd]();
+  } else if (cmd.startsWith('AN')) {
+    resp = `<span style="color:#94a3b8"> AVAILABILITY DISPLAY...<br> NO SPECIFIC RESPONSE FOR "${cmd}"<br> Try: AN15NOVDACDXB or AN15NOVDACDXBEK</span>`;
+  } else if (cmd.startsWith('FQ')) {
+    resp = `<span style="color:#94a3b8"> TRY: FQDDACDXBEK or FQDDACDOH</span>`;
+  } else if (cmd.startsWith('RT')) {
+    resp = `<span style="color:#f87171"> PNR ${cmd.slice(2)} NOT FOUND IN SYSTEM. Try RTABCXYZ</span>`;
+  } else {
+    resp = `<span style="color:#f87171"> COMMAND NOT RECOGNIZED: "${cmd}"<br> Type HELP to see available commands.</span>`;
+  }
+  out.innerHTML += prompt + resp + '<br>';
+  out.scrollTop = out.scrollHeight;
+  input.value = '';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter') runCmd();
+}
+
+// ─── INIT ───
+showHome();
+</script>
+</body>
+</html>
